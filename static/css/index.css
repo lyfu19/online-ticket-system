@@ -1,0 +1,107 @@
+/* 分类导航栏 */
+.category-nav {
+    background-color: #007bff;
+    padding: 15px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .category-nav a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 25px;
+    background-color: #0056b3;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .category-nav a i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+  }
+  
+  .category-nav a:hover {
+    background-color: #003580;
+  }
+  
+  /* 主体内容 */
+  .main-content {
+    width: 80%;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .main-content h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+  
+  /* 轮播区域 */
+  .carousel {
+    width: 100%;
+    height: 400px;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+  }
+  
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+  }
+  
+  .slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .slide img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+  }
+  
+  /* 轮播控制 */
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
