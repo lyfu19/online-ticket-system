@@ -16,13 +16,16 @@
     <div class="logo">Online Ticketing System</div>
     <div class="nav-links">
       {% if current_user %}
-        <!-- If the user is logged in -->
+        <!-- 用户已登录，显示用户名和登出按钮 -->
         <span>Welcome, {{ current_user.username }}!</span>
-        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
-      {% else %}
-        <!-- If no user is logged in, show Register/Login -->
-        <a href="{{ url_for('auth.register') }}" class="register">Register</a>
-        <a href="{{ url_for('auth.login') }}" class="login">Sign In</a>
+        <a href="{{ url_for('auth.logout') }}" class="secondary-button">Logout</a>
+        <a href="{{ url_for('auth.settings') }}" class="gear-button">
+          <i class="fas fa-cog"></i> <!-- 齿轮图标 -->
+        </a>
+      {% elif request.endpoint != 'auth.register' and request.endpoint != 'auth.login' %}
+        <!-- 用户未登录，并且当前页面不是登录或注册页面，显示注册和登录按钮 -->
+        <a href="{{ url_for('auth.register') }}" class="secondary-button">Register</a>
+        <a href="{{ url_for('auth.login') }}" class="primary-button">Sign In</a>
       {% endif %}
     </div>
   </div>

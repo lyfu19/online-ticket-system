@@ -46,6 +46,12 @@ button:hover {
   background-color: #0056b3;
 }
 
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 #registerMessage,
 #loginMessage {
   margin-top: 15px;

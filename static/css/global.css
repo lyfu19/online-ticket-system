@@ -1,88 +1,104 @@
 /* 全局基础样式 */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body, html {
-    height: 100%;
-    font-family: "Arial", sans-serif;
-    background-color: #f8f9fa;
-  }
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  /* 顶部导航栏 */
-  .navbar {
-    background-color: #003580;
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .navbar .nav-links {
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    padding: 8px 15px;
-    border: 2px solid transparent;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, border 0.3s ease;
-  }
-  
-  .nav-links .login {
-    background-color: black;
-    color: white;
-    border: 2px solid black;
-  }
-  
-  .nav-links .register {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-  
-  .nav-links .login:hover {
-    background-color: #333;
-  }
-  
-  .nav-links .register:hover {
-    background-color: white;
-    color: #003580;
-  }
-  
-  /* 页脚 */
-  footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #f8f9fa;
-    color: #888;
-    margin-top: 50px;
-    font-size: 0.9rem;
-  }
-  
-  footer a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  footer a:hover {
-    text-decoration: underline;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100%;
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 顶部导航栏 */
+.navbar {
+  background-color: #003580;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 8px 15px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.nav-links .primary-button {
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+}
+
+.nav-links .secondary-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.nav-links .primary-button:hover {
+  background-color: #333;
+}
+
+.nav-links .secondary-button:hover {
+  background-color: white;
+  color: #003580;
+}
+
+/* 齿轮按钮样式 */
+.gear-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.gear-button:hover {
+  color: #cccccc;  /* 悬停时颜色变化 */
+}
+
+/* 页脚 */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  color: #888;
+  margin-top: 50px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
