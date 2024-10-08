@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_migrate import Migrate
 from config import Config
 from models import db
 from auth import auth_blueprint
+from views import inject_user, home
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -10,9 +11,9 @@ app.config.from_object(Config)
 db.init_app(app)
 migrate = Migrate(app, db)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# 注册 inject_user 和路由
+app.context_processor(inject_user)
+app.route('/')(home)
 
 app.register_blueprint(auth_blueprint, url_prefix='/auth')
 

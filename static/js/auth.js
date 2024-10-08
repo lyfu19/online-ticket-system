@@ -120,8 +120,13 @@ if (registerForm) {
             const result = await response.json();
 
             if (response.ok) {
-                document.querySelector('#registerMessage').textContent = result.message;
+                document.querySelector('#registerMessage').innerHTML = result.message + ' <a href="/auth/login">Click here to login</a>';
                 document.querySelector('#registerMessage').style.color = 'green';  // 成功时显示绿色
+
+                // 注册成功后 2 秒钟跳转到登录页面
+                setTimeout(() => {
+                    window.location.href = '/auth/login'; // 跳转到登录页面
+                }, 2000);
             } else {
                 document.querySelector('#registerMessage').textContent = result.message || 'Registration failed!';
                 document.querySelector('#registerMessage').style.color = 'red';  // 失败时显示红色

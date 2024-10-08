@@ -15,9 +15,14 @@
   <div class="navbar">
     <div class="logo">Online Ticketing System</div>
     <div class="nav-links">
-      {% if request.endpoint != 'auth.register' and request.endpoint != 'auth.login' %}
-      <a href="{{ url_for('auth.register') }}" class="register">Register</a>
-      <a href="{{ url_for('auth.login') }}" class="login">Sign In</a>
+      {% if current_user %}
+        <!-- If the user is logged in -->
+        <span>Welcome, {{ current_user.username }}!</span>
+        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+      {% else %}
+        <!-- If no user is logged in, show Register/Login -->
+        <a href="{{ url_for('auth.register') }}" class="register">Register</a>
+        <a href="{{ url_for('auth.login') }}" class="login">Sign In</a>
       {% endif %}
     </div>
   </div>
