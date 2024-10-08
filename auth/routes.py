@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from models import User, db
 from . import auth_blueprint  # 这里导入已经定义好的蓝图
@@ -31,3 +32,22 @@ def register():
         return jsonify({"message": "Registration successful!"}), 200  # 返回 JSON 数据
 
     return render_template('register.html')  # 对于 GET 请求，返回模板
+
+@auth_blueprint.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        data = request.get_json()  # 获取JSON数据
+        username = data.get('username')
+        password = data.get('password')
+
+        # 查询用户
+        user = User.query.filter_by(username=username).first()
+
+        if user and check_password_hash(user.password, password):
+            # 登录成功，将用户ID存储到session中
+            session['user_id'] = user.id
+            return jsonify(message="Login successful!"), 200
+        else:
+            return jsonify(message="Invalid username or password!"), 401
+
+    return render_template('login.html')

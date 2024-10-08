@@ -82,64 +82,97 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+}
+
 // 注册表单提交逻辑
-document.querySelector('#registerForm').addEventListener('submit', async function (event) {
-    event.preventDefault(); // 阻止表单默认提交
+const registerForm = document.querySelector('#registerForm');
+if (registerForm) {
+    registerForm.addEventListener('submit', async function (event) {
+        event.preventDefault(); // 阻止表单默认提交
 
-    const formData = {
-        username: document.querySelector('#username').value,
-        email: document.querySelector('#email').value,
-        password: document.querySelector('#password').value,
-    };
+        const username = document.querySelector('#username').value;
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
 
-    try {
-        const response = await fetch('/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
+        // 对密码进行哈希处理
+        const hashedPassword = await hashPassword(password);
 
-        const result = await response.json();
+        const formData = {
+            username: username,
+            email: email,
+            password: hashedPassword,  // 发送哈希后的密码
+        };
 
-        if (response.ok) {
-            document.querySelector('#registerMessage').textContent = result.message;
-            document.querySelector('#registerMessage').style.color = 'green';  // 成功时显示绿色
-        } else {
-            document.querySelector('#registerMessage').textContent = result.message || 'Registration failed!';
-            document.querySelector('#registerMessage').style.color = 'red';  // 失败时显示红色
+        try {
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                document.querySelector('#registerMessage').textContent = result.message;
+                document.querySelector('#registerMessage').style.color = 'green';  // 成功时显示绿色
+            } else {
+                document.querySelector('#registerMessage').textContent = result.message || 'Registration failed!';
+                document.querySelector('#registerMessage').style.color = 'red';  // 失败时显示红色
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.querySelector('#registerMessage').textContent = 'An unexpected error occurred!';
+            document.querySelector('#registerMessage').style.color = 'red';  // 错误时显示红色
         }
-    } catch (error) {
-        console.error('Error:', error);
-        document.querySelector('#registerMessage').textContent = 'An unexpected error occurred!';
-        document.querySelector('#registerMessage').style.color = 'red';  // 错误时显示红色
-    }
-});
+    });
+}
 
 // 登录表单提交逻辑
-document.querySelector('#loginForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
+const loginForm = document.querySelector('#loginForm');
+if (loginForm) {
+    loginForm.addEventListener('submit', async function (event) {
+        event.preventDefault(); // 阻止表单默认提交
 
-    const formData = {
-        username: document.querySelector('#username').value,
-        password: document.querySelector('#password').value,
-    };
+        const username = document.querySelector('#username').value;
+        const password = document.querySelector('#password').value;
 
-    try {
-        const response = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
+        // 对密码进行哈希处理
+        const hashedPassword = await hashPassword(password);
 
-        const result = await response.json();
+        const formData = {
+            username: username,
+            password: hashedPassword,
+        };
 
-        if (response.ok) {
-            document.querySelector('#loginMessage').textContent = result.message;
-        } else {
-            document.querySelector('#loginMessage').textContent = result.message;
+        try {
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                document.querySelector('#loginMessage').textContent = result.message;
+                document.querySelector('#loginMessage').style.color = 'green';
+                // 登录成功，可以在此处进行页面跳转
+                window.location.href = '/';
+            } else {
+                const result = await response.json();
+                document.querySelector('#loginMessage').textContent = result.message || 'Login failed!';
+                document.querySelector('#loginMessage').style.color = 'red';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.querySelector('#loginMessage').textContent = 'An unexpected error occurred!';
+            document.querySelector('#loginMessage').style.color = 'red';
         }
-    } catch (error) {
-        console.error('Error:', error);
-        document.querySelector('#loginMessage').textContent = 'An error occurred!';
-    }
-});
+    });
+}

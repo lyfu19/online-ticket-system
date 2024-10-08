@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Register - Online Ticketing System{% endblock %}
+{% block title %}Login - Online Ticketing System{% endblock %}
 
 {% block extra_css %}
 <!-- 引入 form.css -->
@@ -9,23 +9,17 @@
 
 {% block content %}
 <div class="form-container">
-    <h2>Register</h2>
-    <form id="registerForm">
+    <h2>Login</h2>
+    <form id="loginForm">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-
-        <button type="submit" id="registerButton" disabled>Register</button>
+        <button type="submit">Login</button>
     </form>
-    <div id="registerMessage"></div>
+    <div id="loginMessage"></div>
 </div>
 {% endblock %}
 

@@ -17,7 +17,7 @@
     <div class="nav-links">
       {% if request.endpoint != 'auth.register' and request.endpoint != 'auth.login' %}
       <a href="{{ url_for('auth.register') }}" class="register">Register</a>
-      <a href="javascript:void(0);" class="login" onclick="showPlaceholder()">Sign In</a>
+      <a href="{{ url_for('auth.login') }}" class="login">Sign In</a>
       {% endif %}
     </div>
   </div>
