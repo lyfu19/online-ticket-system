@@ -27,7 +27,7 @@
             <p class="vip-price">VIP: ${{ concert.vip_ticket_price }}</p>
             <p class="regular-price">Regular: ${{ concert.regular_ticket_price }}</p>
         </div>
-        <a class="primary-button" href="#">View Details</a>
+        <a class="primary-button" href="{{ url_for('auth.concert_detail', concert_id=concert.id) }}">View Details</a>
     </div>
     {% endfor %}
 </div>

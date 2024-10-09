@@ -17,7 +17,7 @@
       {% block page_title %}Online Ticketing System{% endblock %}
     </div>
     <div class="nav-links">
-      {% if current_user %}
+      {% if current_user.is_authenticated %}
       <!-- 用户已登录，显示用户名和登出按钮 -->
       <span>Welcome, {{ current_user.username }}!</span>
       <a href="{{ url_for('auth.logout', next=request.path) }}" class="secondary-button">Logout</a>

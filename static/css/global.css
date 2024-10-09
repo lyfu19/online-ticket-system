@@ -26,6 +26,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;  /* 确保导航栏相对定位，防止被其他元素影响 */
+  z-index: 100;  /* 保证导航栏在其他内容上方 */
 }
 
 .navbar .logo {
@@ -36,12 +38,13 @@ body {
 .navbar .nav-links {
   display: flex;
   align-items: center;
+  justify-content: flex-end; /* 确保导航链接靠右对齐 */
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  margin-left: 20px;
+  margin-left: 20px;  /* 增加按钮之间的间距 */
   padding: 8px 15px;
   border: 2px solid transparent;
   border-radius: 5px;
@@ -52,12 +55,14 @@ body {
   background-color: black;
   color: white;
   border: 2px solid black;
+  margin-left: 15px;  /* 确保主按钮有合适的左边距 */
 }
 
 .nav-links .secondary-button {
   background-color: transparent;
   color: white;
   border: 2px solid white;
+  margin-left: 15px;  /* 确保辅助按钮有合适的左边距 */
 }
 
 .nav-links .primary-button:hover {

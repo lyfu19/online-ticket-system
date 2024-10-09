@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
     const settingForm = document.getElementById('settingForm');
+    const concertPurchaseForm = document.getElementById('concertPurchaseForm');
 
     // 打开模态框
     window.openModal = function(modalId) {
@@ -217,6 +218,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error:', error);
                 settingMessage.textContent = 'An unexpected error occurred!';
                 settingMessage.style.color = 'red';
+            }
+        });
+    }
+
+    if (concertPurchaseForm) {
+        concertPurchaseForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const ticketType = document.getElementById('ticketType').value;
+
+            const formData = {
+                ticket_type: ticketType
+            };
+
+            try {
+                const response = await fetch('/auth/purchase_ticket', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+                const purchaseMessage = document.getElementById('purchaseMessage');
+
+                if (response.status === 401) {
+                    // 用户未登录，弹出模态框
+                    openModal('login');
+                } else if (response.ok) {
+                    purchaseMessage.textContent = 'Purchase successful!';
+                    purchaseMessage.style.color = 'green';
+                } else {
+                    purchaseMessage.textContent = result.message || 'Purchase failed!';
+                    purchaseMessage.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                purchaseMessage.textContent = 'An unexpected error occurred!';
+                purchaseMessage.style.color = 'red';
             }
         });
     }
