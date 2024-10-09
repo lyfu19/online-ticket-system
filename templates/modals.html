@@ -1,0 +1,57 @@
+<!-- 登录模态框 -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('login')">&times;</span>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="loginUsername">Username:</label>
+      <input type="text" id="loginUsername" name="username" required />
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" name="password" required />
+      <button type="submit">Login</button>
+    </form>
+    <div id="loginMessage"></div>
+  </div>
+</div>
+
+<!-- 注册模态框 -->
+<div class="modal" id="registerModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('register')">&times;</span>
+    <h2>Register</h2>
+    <form id="registerForm">
+      <label for="registerUsername">Username:</label>
+      <input type="text" id="registerUsername" name="username" required />
+      <label for="registerEmail">Email:</label>
+      <input type="email" id="registerEmail" name="email" required />
+      <label for="registerPassword">Password:</label>
+      <input type="password" id="registerPassword" name="password" required />
+      <label for="registerConfirmPassword">Confirm Password:</label>
+      <input type="password" id="registerConfirmPassword" name="confirmPassword" required />
+      <button type="submit" id="registerButton" disabled>Register</button>
+    </form>
+    <div id="registerMessage"></div>
+  </div>
+</div>
+
+<!-- 设置模态框 -->
+<div class="modal" id="settingsModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('settings')">&times;</span>
+    <h2>User Settings</h2>
+    <form id="settingForm">
+      <label for="settingsEmail">Email:</label>
+      <input type="email" id="settingsEmail" name="email" value="{{ current_user.email }}" required />
+      <label for="settingsCurrentPassword">Current Password:</label>
+      <input type="password" id="settingsCurrentPassword" name="current_password" required />
+      <label for="settingsNewPassword">New Password:</label>
+      <input type="password" id="settingsNewPassword" name="new_password" />
+      <label for="settingsConfirmPassword">Confirm New Password:</label>
+      <input type="password" id="settingsConfirmPassword" name="confirm_password" />
+      <button type="submit" id="save_settings" disabled>
+        Save Settings
+      </button>
+    </form>
+    <div id="settingMessage"></div>
+  </div>
+</div>

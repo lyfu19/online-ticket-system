@@ -31,8 +31,6 @@ def register():
 
         return jsonify({"message": "Registration successful!"}), 200  # 返回 JSON 数据
 
-    return render_template('register.html')  # 对于 GET 请求，返回模板
-
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -47,18 +45,17 @@ def login():
             # 登录成功，将用户ID存储到session中
             session['user_id'] = user.id
             print(f"User {user.username} logged in with session ID: {session['user_id']}")  # 添加调试信息
-            return jsonify(message="Login successful!"), 200
+            return jsonify({"message": "Login successful!"}), 200
         else:
             flash('Login failed, please try again.')
             return jsonify(message="Invalid username or password!"), 401
-
-    return render_template('login.html')
 
 @auth_blueprint.route('/logout')
 def logout():
     session.pop('user_id', None)  # 清除用户会话
     flash('You have been logged out.')
-    return redirect(url_for('home'))
+    next_page = request.args.get('next', url_for('home'))
+    return redirect(next_page)
 
 @auth_blueprint.route('/settings', methods=['GET', 'POST'])
 def settings():
@@ -91,6 +88,3 @@ def settings():
         # 刷新 session 中的用户数据，确保 inject_user 能反映最新信息
         session['user_id'] = user.id  # 可以使用其他属性刷新，如用户名
         return jsonify({"message": "Settings updated successfully!"}), 200
-
-    # 如果是 GET 请求，则渲染设置页面
-    return render_template('settings.html', user=user)

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Available Concerts - Online Ticketing System{% endblock %}
+
+{% block page_title %}Available Concerts{% endblock %}
+
+{% block extra_css %}
+<!-- 引入独立的 concert.css 样式文件 -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concert.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="concert-list">
+    {% for concert in concerts %}
+    <div class="concert-card">
+        <h3>{{ concert.concert_name }}</h3>
+        <p class="artist">by {{ concert.artist }}</p>
+        <div class="concert-details">
+            <span class="label">Date:</span>
+            <span class="value">{{ concert.concert_date.strftime('%d %B %Y') }}</span>
+        </div>
+        <div class="concert-details">
+            <span class="label">City:</span>
+            <span class="value">{{ concert.city }}</span>
+        </div>
+        <div class="concert-prices">
+            <p class="vip-price">VIP: ${{ concert.vip_ticket_price }}</p>
+            <p class="regular-price">Regular: ${{ concert.regular_ticket_price }}</p>
+        </div>
+        <a class="primary-button" href="#">View Details</a>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    <ul>
+        {% if pagination.has_prev %}
+        <li><a href="{{ url_for('concerts', page=pagination.prev_num) }}">Previous</a></li>
+        {% endif %}
+
+        {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+        {% if page_num %}
+        {% if page_num == pagination.page %}
+        <li class="active"><a href="#">{{ page_num }}</a></li>
+        {% else %}
+        <li><a href="{{ url_for('concerts', page=page_num) }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% else %}
+        <li><a href="#">...</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if pagination.has_next %}
+        <li><a href="{{ url_for('concerts', page=pagination.next_num) }}">Next</a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}

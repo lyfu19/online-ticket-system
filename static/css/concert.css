@@ -1,0 +1,95 @@
+.concert-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.concert-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.concert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.concert-card h3 {
+    margin-bottom: 5px;
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #333;
+    min-height: 2.5em; /* 标题部分保持高度 */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; /* 水平和垂直居中 */
+}
+
+.concert-card .artist {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 10px;
+    min-height: 1.5em; /* 保持 artist 部分高度一致 */
+}
+
+.concert-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.concert-details .label {
+    font-weight: bold;
+    color: #555;
+}
+
+.concert-details .value {
+    color: #333;
+}
+
+.concert-prices {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.concert-prices p {
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+.vip-price {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+.regular-price {
+    font-weight: bold;
+    color: #5bc0de;
+}
+
+.primary-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    align-self: center;
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+}

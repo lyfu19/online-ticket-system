@@ -1,15 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 注册表单
+    const modals = {
+        register: document.getElementById('registerModal'),
+        login: document.getElementById('loginModal'),
+        settings: document.getElementById('settingsModal'),
+    };
+
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
     const settingForm = document.getElementById('settingForm');
 
-    // 注册表单处理逻辑
+    // 打开模态框
+    window.openModal = function(modalId) {
+        const modal = modals[modalId];
+        if (modal) {
+            modal.style.display = 'block';
+        }
+    };
+
+    // 关闭模态框
+    window.closeModal = function(modalId) {
+        const modal = modals[modalId];
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    };
+
+    // 注册表单逻辑
     if (registerForm) {
-        const usernameInput = document.getElementById('username');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const usernameInput = document.getElementById('registerUsername');
+        const emailInput = document.getElementById('registerEmail');
+        const passwordInput = document.getElementById('registerPassword');
+        const confirmPasswordInput = document.getElementById('registerConfirmPassword');
         const registerMessage = document.getElementById('registerMessage');
         const registerButton = document.getElementById('registerButton');
 
@@ -46,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordInput.addEventListener('input', validateRegisterForm);
         confirmPasswordInput.addEventListener('input', validateRegisterForm);
 
-        registerForm.addEventListener('submit', async function (event) {
+        registerForm.addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const formData = {
@@ -65,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-                    registerMessage.innerHTML = result.message + ' <a href="/auth/login">Click here to login</a>';
+                    registerMessage.textContent = result.message;
                     registerMessage.style.color = 'green';
                     setTimeout(() => {
-                        window.location.href = '/auth/login';
+                        closeModal('register');
                     }, 2000);
                 } else {
                     registerMessage.textContent = result.message || 'Registration failed!';
@@ -82,13 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 登录表单处理逻辑
+    // 登录表单逻辑
     if (loginForm) {
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
+        const usernameInput = document.getElementById('loginUsername');
+        const passwordInput = document.getElementById('loginPassword');
         const loginMessage = document.getElementById('loginMessage');
 
-        loginForm.addEventListener('submit', async function (event) {
+        loginForm.addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const formData = {
@@ -106,7 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     loginMessage.textContent = 'Login successful!';
                     loginMessage.style.color = 'green';
-                    window.location.href = '/';
+                    closeModal('login');
+                    window.location.reload();  // 刷新页面
                 } else {
                     const result = await response.json();
                     loginMessage.textContent = result.message || 'Login failed!';
@@ -120,12 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 修改信息表单处理逻辑
+    // 设置表单逻辑
     if (settingForm) {
-        const emailInput = document.getElementById('email');
-        const currentPasswordInput = document.getElementById('current_password');
-        const newPasswordInput = document.getElementById('new_password');
-        const confirmPasswordInput = document.getElementById('confirm_password');
+        const emailInput = document.getElementById('settingsEmail');
+        const currentPasswordInput = document.getElementById('settingsCurrentPassword');
+        const newPasswordInput = document.getElementById('settingsNewPassword');
+        const confirmPasswordInput = document.getElementById('settingsConfirmPassword');
         const settingMessage = document.getElementById('settingMessage');
         const saveButton = document.getElementById('save_settings');
 
@@ -162,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newPasswordInput.addEventListener('input', validateSettingsForm);
         confirmPasswordInput.addEventListener('input', validateSettingsForm);
 
-        settingForm.addEventListener('submit', async function (event) {
+        settingForm.addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const formData = {
@@ -184,7 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     settingMessage.textContent = 'Settings updated successfully!';
                     settingMessage.style.color = 'green';
                     setTimeout(() => {
-                        window.location.href = '/';
+                        closeModal('settings');  // 关闭设置模态框
+                        window.location.reload();  // 刷新页面
                     }, 2000);
                 } else {
                     settingMessage.textContent = result.message || 'Update failed!';

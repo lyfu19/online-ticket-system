@@ -1,7 +1,17 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
+import enum
 
 db = SQLAlchemy()
+
+class TicketStatus(enum.Enum):
+    RESERVED = 'reserved'  # 预订
+    PAID = 'paid'          # 支付
+    CANCELED = 'canceled'  # 取消
+
+class TicketType(enum.Enum):
+    VIP = 'VIP'
+    REGULAR = 'regular'  # 普通票
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -11,6 +21,9 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     registered_on = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
+    # 一个用户可以拥有多张演唱会门票（与 ConcertTicket 的一对多关系）
+    concert_tickets = db.relationship('ConcertTicket', backref='user', lazy=True)
+
 class Concert(db.Model):
     __tablename__ = 'concerts'
     id = db.Column(db.Integer, primary_key=True)
@@ -19,7 +32,13 @@ class Concert(db.Model):
     venue = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(100), nullable=False)
     concert_date = db.Column(db.DateTime, nullable=False)
-    ticket_price = db.Column(db.Float, nullable=False)
+
+    # VIP 和 普通票 价格
+    vip_ticket_price = db.Column(db.Float, nullable=False)
+    regular_ticket_price = db.Column(db.Float, nullable=False)
+
+    # 一场演唱会可以有多张门票（与 ConcertTicket 的一对多关系）
+    concert_tickets = db.relationship('ConcertTicket', backref='concert', lazy=True)
 
 class ConcertTicket(db.Model):
     __tablename__ = 'concert_tickets'
@@ -27,12 +46,10 @@ class ConcertTicket(db.Model):
     concert_id = db.Column(db.Integer, db.ForeignKey('concerts.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     seat_number = db.Column(db.String(10))
+    ticket_type = db.Column(db.Enum(TicketType), nullable=False)
     ticket_price = db.Column(db.Float, nullable=False)
-    status = db.Column(db.String(20), nullable=False)  # '预订', '支付', '取消'
+    status = db.Column(db.Enum(TicketStatus), default=TicketStatus.RESERVED, nullable=False)
     purchase_date = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-
-    concert = db.relationship('Concert', backref='concert_tickets')
-    user = db.relationship('User', backref='concert_tickets')
 
 class Movie(db.Model):
     __tablename__ = 'movies'

@@ -13,19 +13,22 @@
 <body>
   <!-- 顶部导航栏 -->
   <div class="navbar">
-    <div class="logo">Online Ticketing System</div>
+    <div class="logo">
+      {% block page_title %}Online Ticketing System{% endblock %}
+    </div>
     <div class="nav-links">
       {% if current_user %}
-        <!-- 用户已登录，显示用户名和登出按钮 -->
-        <span>Welcome, {{ current_user.username }}!</span>
-        <a href="{{ url_for('auth.logout') }}" class="secondary-button">Logout</a>
-        <a href="{{ url_for('auth.settings') }}" class="gear-button">
-          <i class="fas fa-cog"></i> <!-- 齿轮图标 -->
-        </a>
-      {% elif request.endpoint != 'auth.register' and request.endpoint != 'auth.login' %}
-        <!-- 用户未登录，并且当前页面不是登录或注册页面，显示注册和登录按钮 -->
-        <a href="{{ url_for('auth.register') }}" class="secondary-button">Register</a>
-        <a href="{{ url_for('auth.login') }}" class="primary-button">Sign In</a>
+      <!-- 用户已登录，显示用户名和登出按钮 -->
+      <span>Welcome, {{ current_user.username }}!</span>
+      <a href="{{ url_for('auth.logout', next=request.path) }}" class="secondary-button">Logout</a>
+      <a href="#" class="gear-button" onclick="openModal('settings')">
+        <i class="fas fa-cog"></i>
+        <!-- 齿轮图标 -->
+      </a>
+      {% else %}
+      <!-- 用户未登录，显示注册和登录按钮 -->
+      <a href="#" class="secondary-button" onclick="openModal('register')">Register</a>
+      <a href="#" class="primary-button" onclick="openModal('login')">Sign In</a>
       {% endif %}
     </div>
   </div>
@@ -41,7 +44,10 @@
     </p>
   </footer>
 
-  <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+  <!-- 引入模态框文件 -->
+  {% include 'modals.html' %}
+
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
   {% block extra_js %}{% endblock %}
 </body>
 
