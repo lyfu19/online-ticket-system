@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         register: document.getElementById('registerModal'),
         login: document.getElementById('loginModal'),
         settings: document.getElementById('settingsModal'),
+        successModal: document.getElementById('successModal'),
     };
 
     const registerForm = document.getElementById('registerForm');
@@ -252,6 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (response.ok) {
                     purchaseMessage.textContent = 'Purchase successful!';
                     purchaseMessage.style.color = 'green';
+                    // 显示购票成功的模态框
+                    openModal('successModal');
                 } else {
                     purchaseMessage.textContent = result.message || 'Purchase failed!';
                     purchaseMessage.style.color = 'red';

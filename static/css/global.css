@@ -250,3 +250,60 @@ button[type="submit"]:hover {
   font-size: 24px;
   color: #333;
 }
+
+/* 购票成功的模态框 */
+#successModal .modal-content {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+#successModal h2 {
+  color: #004085; /* 修改为蓝色调 */
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+#successModal p {
+  font-size: 16px;
+  color: #333;
+}
+
+/* 增大按钮尺寸，并调整颜色 */
+#successModal .primary-button {
+  display: inline-block;
+  background-color: #007bff; /* 按钮的背景颜色使用蓝色 */
+  color: white;
+  padding: 12px 24px; /* 调整按钮尺寸 */
+  margin-top: 20px;
+  font-size: 18px; /* 增大按钮文字的字体大小 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#successModal .primary-button:hover {
+  background-color: #0056b3; /* 深色hover效果 */
+}
+
+/* 关闭按钮样式 */
+#successModal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#successModal .close:hover,
+#successModal .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
