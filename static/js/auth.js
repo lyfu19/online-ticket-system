@@ -225,10 +225,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (concertPurchaseForm) {
         concertPurchaseForm.addEventListener('submit', async function (event) {
             event.preventDefault();
-            const ticketType = document.getElementById('ticketType').value;
+            const ticketType = document.getElementById('ticketType').value;  // 票务类型
+            const concertDetails = document.getElementById('concertDetails');
+            const concertId = concertDetails.getAttribute('data-concert-id');
+            const ticketQuantity = document.getElementById('ticketQuantity').value;
 
             const formData = {
-                ticket_type: ticketType
+                concert_id: concertId,
+                ticket_type: ticketType,
+                ticket_quantity: ticketQuantity
             };
 
             try {

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
-from models import User, db, Concert, ConcertTicket
+from models import User, db, Concert, ConcertTicket, TicketType
 from . import auth_blueprint  # 这里导入已经定义好的蓝图
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import jsonify  # 引入 jsonify 函数
@@ -102,21 +102,26 @@ def purchase_ticket():
         return jsonify({'message': 'Please log in to purchase tickets.'}), 401
     
     data = request.get_json()
-    ticket_type = data.get('ticket_type')
-    concert_id = data.get('concert_id')
-    ticket_quantity = data.get('ticket_quantity', 1)  # 默认购票数量为1
+    ticket_type_str = data.get('ticket_type')
+    concert_id = int(data.get('concert_id'))
+    ticket_quantity = int(data.get('ticket_quantity', 1))  # 默认购票数量为1
 
-    if not ticket_type or not concert_id:
+    if not ticket_type_str or not concert_id:
         return jsonify({"message": "Please select a ticket type and concert!"}), 400
 
+    # 将票务类型字符串转换为枚举类型
+    try:
+        ticket_type = TicketType(ticket_type_str)  # 确保 ticket_type 是枚举类型
+    except ValueError:
+        return jsonify({"message": "Invalid ticket type!"}), 400
+    
     # 获取演唱会
     concert = Concert.query.get(concert_id)
     if not concert:
         return jsonify({"message": "Concert not found!"}), 404
 
-    # 假设这里你可以验证演唱会的票务情况，例如检查是否有足够余票
-    available_tickets = get_available_tickets(concert_id, ticket_type)
-    if available_tickets < ticket_quantity:
+    # 检查余票
+    if concert.available_tickets < ticket_quantity:
         return jsonify({"message": "Not enough tickets available!"}), 400
 
     # 创建 ConcertTicket 对象
@@ -124,14 +129,13 @@ def purchase_ticket():
         new_ticket = ConcertTicket(
             concert_id=concert_id,
             user_id=current_user.id,
-            seat_number=generate_seat_number(concert_id),  # 你可以定义一个函数生成座位号
-            ticket_type=ticket_type,
-            ticket_price=get_ticket_price(concert, ticket_type),  # 获取票价
+            seat_number=generate_seat_number(concert_id),  # 生成座位号
+            ticket_type=ticket_type,  # 使用枚举类型
+            ticket_price=get_ticket_price(concert, ticket_type),
             purchase_date=datetime.now(timezone.utc)
         )
         db.session.add(new_ticket)
-
-    # 提交到数据库
+    concert.available_tickets -= int(ticket_quantity)
     db.session.commit()
 
     return jsonify({"message": "Purchase successful!"}), 200
@@ -143,7 +147,7 @@ def generate_seat_number(concert_id):
 
 # 这个函数根据票务类型获取票价
 def get_ticket_price(concert, ticket_type):
-    if ticket_type == 'vip':
+    if ticket_type == TicketType.VIP:
         return concert.vip_ticket_price
     else:
         return concert.regular_ticket_price
@@ -151,4 +155,4 @@ def get_ticket_price(concert, ticket_type):
 # 这个函数模拟检查是否有余票（根据你需要的逻辑处理）
 def get_available_tickets(concert_id, ticket_type):
     # 假设你有一种方式检查特定票种的余票数量
-    return 10  # 这里是假设有10张余票
+    return 100000  # 这里是假设有10张余票

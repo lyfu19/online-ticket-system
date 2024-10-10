@@ -18,7 +18,7 @@ Details{% endblock %} {% block content %}
             <form id="concertPurchaseForm" class="ticket-form">
                 <label for="ticketType">Select Ticket Type:</label>
                 <select id="ticketType" name="ticketType" required>
-                    <option value="vip">VIP - ${{ concert.vip_ticket_price }}</option>
+                    <option value="VIP">VIP - ${{ concert.vip_ticket_price }}</option>
                     <option value="regular">
                         Regular - ${{ concert.regular_ticket_price }}
                     </option>
@@ -34,6 +34,8 @@ Details{% endblock %} {% block content %}
         </div>
     </div>
 </div>
+<!-- 在某个元素上存储 concert.id -->
+<div id="concertDetails" data-concert-id="{{ concert.id }}"></div>
 {% endblock %} {% block extra_css %}
 <style>
     body {

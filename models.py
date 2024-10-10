@@ -25,9 +25,6 @@ class User(db.Model, UserMixin):
     # 一个用户可以拥有多张演唱会门票（与 ConcertTicket 的一对多关系）
     concert_tickets = db.relationship('ConcertTicket', backref='user', lazy=True)
 
-    # def get_id(self):
-    #     return str(self.id)  # 必须返回字符串形式的ID，Flask-Login要求
-
 class Concert(db.Model):
     __tablename__ = 'concerts'
     id = db.Column(db.Integer, primary_key=True)
@@ -37,6 +34,7 @@ class Concert(db.Model):
     city = db.Column(db.String(100), nullable=False)
     concert_date = db.Column(db.DateTime, nullable=False)
     cover_image_url = db.Column(db.String(500), nullable=True)
+    available_tickets = db.Column(db.Integer, nullable=False, default=1000)
 
     # VIP 和 普通票 价格
     vip_ticket_price = db.Column(db.Float, nullable=False)
