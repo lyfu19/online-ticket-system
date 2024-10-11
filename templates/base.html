@@ -14,6 +14,10 @@
   <!-- 顶部导航栏 -->
   <div class="navbar">
     <div class="logo">
+      <!-- 小房子图标 -->
+      <a href="{{ url_for('home') }}" class="home-button">
+        <i class="fas fa-home"></i>
+      </a>
       {% block page_title %}Online Ticketing System{% endblock %}
     </div>
     <div class="nav-links">

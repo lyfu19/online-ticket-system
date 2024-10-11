@@ -26,8 +26,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;  /* 确保导航栏相对定位，防止被其他元素影响 */
-  z-index: 100;  /* 保证导航栏在其他内容上方 */
+  position: relative;
+  /* 确保导航栏相对定位，防止被其他元素影响 */
+  z-index: 100;
+  /* 保证导航栏在其他内容上方 */
 }
 
 .navbar .logo {
@@ -38,13 +40,15 @@ body {
 .navbar .nav-links {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* 确保导航链接靠右对齐 */
+  justify-content: flex-end;
+  /* 确保导航链接靠右对齐 */
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  margin-left: 20px;  /* 增加按钮之间的间距 */
+  margin-left: 20px;
+  /* 增加按钮之间的间距 */
   padding: 8px 15px;
   border: 2px solid transparent;
   border-radius: 5px;
@@ -55,14 +59,16 @@ body {
   background-color: black;
   color: white;
   border: 2px solid black;
-  margin-left: 15px;  /* 确保主按钮有合适的左边距 */
+  margin-left: 15px;
+  /* 确保主按钮有合适的左边距 */
 }
 
 .nav-links .secondary-button {
   background-color: transparent;
   color: white;
   border: 2px solid white;
-  margin-left: 15px;  /* 确保辅助按钮有合适的左边距 */
+  margin-left: 15px;
+  /* 确保辅助按钮有合适的左边距 */
 }
 
 .nav-links .primary-button:hover {
@@ -264,7 +270,8 @@ button[type="submit"]:hover {
 }
 
 #successModal h2 {
-  color: #004085; /* 修改为蓝色调 */
+  color: #004085;
+  /* 修改为蓝色调 */
   font-size: 24px;
   margin-bottom: 15px;
 }
@@ -277,11 +284,14 @@ button[type="submit"]:hover {
 /* 增大按钮尺寸，并调整颜色 */
 #successModal .primary-button {
   display: inline-block;
-  background-color: #007bff; /* 按钮的背景颜色使用蓝色 */
+  background-color: #007bff;
+  /* 按钮的背景颜色使用蓝色 */
   color: white;
-  padding: 12px 24px; /* 调整按钮尺寸 */
+  padding: 12px 24px;
+  /* 调整按钮尺寸 */
   margin-top: 20px;
-  font-size: 18px; /* 增大按钮文字的字体大小 */
+  font-size: 18px;
+  /* 增大按钮文字的字体大小 */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -289,7 +299,8 @@ button[type="submit"]:hover {
 }
 
 #successModal .primary-button:hover {
-  background-color: #0056b3; /* 深色hover效果 */
+  background-color: #0056b3;
+  /* 深色hover效果 */
 }
 
 /* 关闭按钮样式 */
@@ -306,4 +317,31 @@ button[type="submit"]:hover {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* 小房子图标样式 */
+.navbar .home-button {
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+  /* 设置图标和标题之间的间距 */
+  display: inline-block;
+  vertical-align: middle;
+  /* 确保图标与标题垂直对齐 */
+}
+
+.navbar .home-button i {
+  font-size: 1.5rem;
+  /* 设置图标的大小 */
+}
+
+/* 让标题和图标在同一行水平对齐 */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .home-button:hover {
+  color: #cccccc;
 }
