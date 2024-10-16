@@ -25,15 +25,26 @@
       <!-- 用户已登录，显示用户名和登出按钮 -->
       <span>Welcome, {{ current_user.username }}!</span>
       <a href="{{ url_for('auth.logout', next=request.path) }}" class="secondary-button">Logout</a>
-      <a href="#" class="gear-button" onclick="openModal('settings')">
-        <i class="fas fa-cog"></i>
-        <!-- 齿轮图标 -->
-      </a>
       {% else %}
       <!-- 用户未登录，显示注册和登录按钮 -->
       <a href="#" class="secondary-button" onclick="openModal('register')">Register</a>
       <a href="#" class="primary-button" onclick="openModal('login')">Sign In</a>
       {% endif %}
+      <!-- <a href="#" class="gear-button" onclick="openModal('settings')">
+        <i class="fas fa-cog"></i>
+      </a> -->
+      <!-- 设置按钮和下拉菜单 -->
+      <div class="dropdown">
+        <a href="#" class="gear-button" onclick="toggleDropdown()">
+          <i class="fas fa-cog"></i>
+        </a>
+        <div id="settingsDropdown" class="dropdown-content">
+          {% if current_user.is_authenticated %}
+          <a href="#" onclick="openModal('profile')">Personal Settings</a>
+          {% endif %}
+          <a href="#" onclick="openModal('language')">Language Settings</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -52,6 +63,7 @@
   {% include 'modals.html' %}
 
   <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/global.js') }}"></script>
   {% block extra_js %}{% endblock %}
 </body>
 

@@ -54,28 +54,6 @@ class ConcertTicket(db.Model):
     status = db.Column(db.Enum(TicketStatus), default=TicketStatus.RESERVED, nullable=False)
     purchase_date = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
-class Movie(db.Model):
-    __tablename__ = 'movies'
-    id = db.Column(db.Integer, primary_key=True)
-    movie_title = db.Column(db.String(255), nullable=False)
-    cinema_name = db.Column(db.String(255), nullable=False)
-    hall = db.Column(db.String(100), nullable=False)  # 影厅名称
-    show_time = db.Column(db.DateTime, nullable=False)
-    ticket_price = db.Column(db.Float, nullable=False)
-
-class MovieTicket(db.Model):
-    __tablename__ = 'movie_tickets'
-    id = db.Column(db.Integer, primary_key=True)
-    movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    seat_number = db.Column(db.String(10))
-    ticket_price = db.Column(db.Float, nullable=False)
-    status = db.Column(db.String(20), nullable=False)  # '预订', '支付', '取消'
-    purchase_date = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-
-    movie = db.relationship('Movie', backref='movie_tickets')
-    user = db.relationship('User', backref='movie_tickets')
-
 class Flight(db.Model):
     __tablename__ = 'flights'
     id = db.Column(db.Integer, primary_key=True)
