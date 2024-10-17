@@ -38,7 +38,7 @@
 <div class="modal" id="settingsModal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('settings')">&times;</span>
-    <h2>User Settings</h2>
+    <h2>User Information Settings</h2>
     <form id="settingForm">
       <label for="settingsEmail">Email:</label>
       <input type="email" id="settingsEmail" name="email" value="{{ current_user.email }}" required />
@@ -63,5 +63,16 @@
       <h2>Success</h2>
       <p>Your ticket purchase was successful!</p>
       <button class="primary-button" onclick="closeModal('successModal')">OK</button>
+  </div>
+</div>
+
+<!-- 语言切换的模态框 -->
+<div class="modal" id="languageModal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('languageModal')">&times;</span>
+      <h2>Select Language</h2>
+      <p>Please choose your preferred language:</p>
+      <button class="primary-button" onclick="setLanguage('en')">English</button>
+      <button class="primary-button" onclick="setLanguage('mi')">Māori</button>
   </div>
 </div>

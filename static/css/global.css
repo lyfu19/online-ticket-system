@@ -381,3 +381,58 @@ button[type="submit"]:hover {
 .show {
   display: block;
 }
+
+/* 语言切换模态框 */
+#languageModal .modal-content {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 300px;  /* 设置适合语言选择的宽度 */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+#languageModal h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+#languageModal p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* 语言选择按钮样式 */
+#languageModal .primary-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#languageModal .primary-button:hover {
+  background-color: #0056b3;
+}
+
+/* 关闭按钮样式复用通用的 .close 样式 */
+#languageModal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#languageModal .close:hover,
+#languageModal .close:focus {
+  color: black;
+}

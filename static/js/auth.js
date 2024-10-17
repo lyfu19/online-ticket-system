@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         login: document.getElementById('loginModal'),
         settings: document.getElementById('settingsModal'),
         successModal: document.getElementById('successModal'),
+        languageModal: document.getElementById('languageModal'),
     };
 
     const registerForm = document.getElementById('registerForm');
