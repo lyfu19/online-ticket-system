@@ -2,13 +2,13 @@
 <div class="modal" id="loginModal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('login')">&times;</span>
-    <h2>Login</h2>
+    <h2>{{ _('Login') }}</h2>
     <form id="loginForm">
-      <label for="loginUsername">Username:</label>
+      <label for="loginUsername">{{ _('Username:') }}</label>
       <input type="text" id="loginUsername" name="username" required />
-      <label for="loginPassword">Password:</label>
+      <label for="loginPassword">{{ _('Password:') }}</label>
       <input type="password" id="loginPassword" name="password" required />
-      <button type="submit">Login</button>
+      <button type="submit">{{ _('Login') }}</button>
     </form>
     <div id="loginMessage"></div>
   </div>
@@ -18,17 +18,17 @@
 <div class="modal" id="registerModal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('register')">&times;</span>
-    <h2>Register</h2>
+    <h2>{{ _('Register') }}</h2>
     <form id="registerForm">
-      <label for="registerUsername">Username:</label>
+      <label for="registerUsername">{{ _('Username:') }}</label>
       <input type="text" id="registerUsername" name="username" required />
-      <label for="registerEmail">Email:</label>
+      <label for="registerEmail">{{ _('Email:') }}</label>
       <input type="email" id="registerEmail" name="email" required />
-      <label for="registerPassword">Password:</label>
+      <label for="registerPassword">{{ _('Password:') }}</label>
       <input type="password" id="registerPassword" name="password" required />
-      <label for="registerConfirmPassword">Confirm Password:</label>
+      <label for="registerConfirmPassword">{{ _('Confirm Password:') }}</label>
       <input type="password" id="registerConfirmPassword" name="confirmPassword" required />
-      <button type="submit" id="registerButton" disabled>Register</button>
+      <button type="submit" id="registerButton" disabled>{{ _('Register') }}</button>
     </form>
     <div id="registerMessage"></div>
   </div>
@@ -38,19 +38,17 @@
 <div class="modal" id="settingsModal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('settings')">&times;</span>
-    <h2>User Information Settings</h2>
+    <h2>{{ _('User Information Settings') }}</h2>
     <form id="settingForm">
-      <label for="settingsEmail">Email:</label>
+      <label for="settingsEmail">{{ _('Email:') }}</label>
       <input type="email" id="settingsEmail" name="email" value="{{ current_user.email }}" required />
-      <label for="settingsCurrentPassword">Current Password:</label>
+      <label for="settingsCurrentPassword">{{ _('Current Password:') }}</label>
       <input type="password" id="settingsCurrentPassword" name="current_password" required />
-      <label for="settingsNewPassword">New Password:</label>
+      <label for="settingsNewPassword">{{ _('New Password:') }}</label>
       <input type="password" id="settingsNewPassword" name="new_password" />
-      <label for="settingsConfirmPassword">Confirm New Password:</label>
+      <label for="settingsConfirmPassword">{{ _('Confirm New Password:') }}</label>
       <input type="password" id="settingsConfirmPassword" name="confirm_password" />
-      <button type="submit" id="save_settings" disabled>
-        Save Settings
-      </button>
+      <button type="submit" id="save_settings" disabled>{{ _('Save Settings') }}</button>
     </form>
     <div id="settingMessage"></div>
   </div>
@@ -60,9 +58,9 @@
 <div class="modal" id="successModal">
   <div class="modal-content">
       <span class="close" onclick="closeModal('successModal')">&times;</span>
-      <h2>Success</h2>
-      <p>Your ticket purchase was successful!</p>
-      <button class="primary-button" onclick="closeModal('successModal')">OK</button>
+      <h2>{{ _('Success') }}</h2>
+      <p>{{ _('Your ticket purchase was successful!') }}</p>
+      <button class="primary-button" onclick="closeModal('successModal')">{{ _('OK') }}</button>
   </div>
 </div>
 
@@ -70,9 +68,9 @@
 <div class="modal" id="languageModal">
   <div class="modal-content">
       <span class="close" onclick="closeModal('languageModal')">&times;</span>
-      <h2>Select Language</h2>
-      <p>Please choose your preferred language:</p>
-      <button class="primary-button" onclick="setLanguage('en')">English</button>
-      <button class="primary-button" onclick="setLanguage('mi')">Māori</button>
+      <h2>{{ _('Select Language') }}</h2>
+      <p>{{ _('Please choose your preferred language:') }}</p>
+      <button class="primary-button" onclick="setLanguage('en')">{{ _('English') }}</button>
+      <button class="primary-button" onclick="setLanguage('mi')">{{ _('Māori') }}</button>
   </div>
 </div>

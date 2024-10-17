@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Online Ticketing System{% endblock %}</title>
+  <title>{% block title %}{{ _('Online Ticketing System') }}{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   {% block extra_css %}{% endblock %}
@@ -18,17 +18,17 @@
       <a href="{{ url_for('home') }}" class="home-button">
         <i class="fas fa-home"></i>
       </a>
-      {% block page_title %}Online Ticketing System{% endblock %}
+      {% block page_title %}{{ _('Online Ticketing System') }}{% endblock %}
     </div>
     <div class="nav-links">
       {% if current_user.is_authenticated %}
       <!-- 用户已登录，显示用户名和登出按钮 -->
-      <span>Welcome, {{ current_user.username }}!</span>
-      <a href="{{ url_for('auth.logout', next=request.path) }}" class="secondary-button">Logout</a>
+      <span>{{ _('Welcome, ') }}{{ current_user.username }}!</span>
+      <a href="{{ url_for('auth.logout', next=request.path) }}" class="secondary-button">{{ _('Logout') }}</a>
       {% else %}
       <!-- 用户未登录，显示注册和登录按钮 -->
-      <a href="#" class="secondary-button" onclick="openModal('register')">Register</a>
-      <a href="#" class="primary-button" onclick="openModal('login')">Sign In</a>
+      <a href="#" class="secondary-button" onclick="openModal('register')">{{ _('Register') }}</a>
+      <a href="#" class="primary-button" onclick="openModal('login')">{{ _('Sign In') }}</a>
       {% endif %}
       <!-- 设置按钮和下拉菜单 -->
       <div class="dropdown">
@@ -37,9 +37,9 @@
         </a>
         <div id="settingsDropdown" class="dropdown-content">
           {% if current_user.is_authenticated %}
-          <a href="#" onclick="openModal('settings')">Personal Settings</a>
+          <a href="#" onclick="openModal('settings')">{{ _('Personal Settings') }}</a>
           {% endif %}
-          <a href="#" onclick="openModal('languageModal')">Language Settings</a>
+          <a href="#" onclick="openModal('languageModal')">{{ _('Language Settings') }}</a>
         </div>
       </div>
     </div>
@@ -49,9 +49,9 @@
 
   <!-- 页脚 -->
   <footer>
-    <p>© 2024 Online Ticketing System. All Rights Reserved.</p>
+    <p>© 2024 {{ _('Online Ticketing System') }}. {{ _('All Rights Reserved.') }}</p>
     <p>
-      If you have any questions, please contact us at
+      {{ _('If you have any questions, please contact us at') }}
       <a href="mailto:support@ticketsystem.com">support@yoobeestudent.ac.nz</a>
     </p>
   </footer>

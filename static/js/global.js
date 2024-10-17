@@ -4,6 +4,12 @@ function toggleDropdown() {
     document.getElementById("settingsDropdown").classList.toggle("show");
 }
 
+// 设置语言的函数
+function setLanguage(lang) {
+    // 跳转到 Flask 的语言切换路由
+    window.location.href = `/set_language/${lang}`;
+}
+
 // 点击模态框外部关闭模态框
 window.onclick = function (event) {
     const loginModal = document.getElementById('loginModal');

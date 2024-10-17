@@ -389,7 +389,8 @@ button[type="submit"]:hover {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  width: 300px;  /* 设置适合语言选择的宽度 */
+  width: auto;  /* 自动调整宽度 */
+  max-width: 400px;  /* 设置最大宽度为 400px */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
@@ -406,6 +407,14 @@ button[type="submit"]:hover {
   margin-bottom: 20px;
 }
 
+/* 语言选择按钮容器 */
+#languageModal .button-container {
+  display: flex;
+  justify-content: center;  /* 让按钮居中排列 */
+  gap: 10px;  /* 设置按钮之间的间距 */
+  flex-wrap: nowrap;  /* 确保按钮不换行 */
+}
+
 /* 语言选择按钮样式 */
 #languageModal .primary-button {
   background-color: #007bff;
@@ -417,13 +426,14 @@ button[type="submit"]:hover {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  white-space: nowrap;  /* 防止按钮内部文本换行 */
 }
 
 #languageModal .primary-button:hover {
   background-color: #0056b3;
 }
 
-/* 关闭按钮样式复用通用的 .close 样式 */
+/* 关闭按钮样式 */
 #languageModal .close {
   color: #aaa;
   float: right;

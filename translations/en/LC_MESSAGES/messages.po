@@ -1,0 +1,288 @@
+# English translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-10-17 15:35+1300\n"
+"PO-Revision-Date: 2024-10-17 15:39+1300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: auth/routes.py:21
+msgid "Please fill out all fields!"
+msgstr "Please fill out all fields!"
+
+#: auth/routes.py:26
+msgid "Username or email already exists!"
+msgstr "Username or email already exists!"
+
+#: auth/routes.py:34
+msgid "Registration successful!"
+msgstr "Registration successful!"
+
+#: auth/routes.py:50
+msgid "Login successful!"
+msgstr "Login successful!"
+
+#: auth/routes.py:52
+msgid "Login failed, please try again."
+msgstr "Login failed, please try again."
+
+#: auth/routes.py:53
+msgid "Invalid username or password!"
+msgstr "Invalid username or password!"
+
+#: auth/routes.py:58
+msgid "You have been logged out."
+msgstr "You have been logged out."
+
+#: auth/routes.py:75
+msgid "Current password is incorrect!"
+msgstr "Current password is incorrect!"
+
+#: auth/routes.py:91
+msgid "Settings updated successfully!"
+msgstr "Settings updated successfully!"
+
+#: auth/routes.py:93
+msgid "Settings page"
+msgstr "Settings page"
+
+#: auth/routes.py:103
+msgid "Please log in to purchase tickets."
+msgstr "Please log in to purchase tickets."
+
+#: auth/routes.py:111
+msgid "Please select a ticket type and concert!"
+msgstr "Please select a ticket type and concert!"
+
+#: auth/routes.py:117
+msgid "Invalid ticket type!"
+msgstr "Invalid ticket type!"
+
+#: auth/routes.py:122
+msgid "Concert not found!"
+msgstr "Concert not found!"
+
+#: auth/routes.py:126
+msgid "Not enough tickets available!"
+msgstr "Not enough tickets available!"
+
+#: auth/routes.py:142
+msgid "Purchase successful!"
+msgstr "Purchase successful!"
+
+#: templates/base.html:7 templates/base.html:21 templates/base.html:52
+#: templates/concerts.html:3 templates/index.html:2
+msgid "Online Ticketing System"
+msgstr "Online Ticketing System"
+
+#: templates/base.html:26
+msgid "Welcome, "
+msgstr "Welcome, "
+
+#: templates/base.html:27
+msgid "Logout"
+msgstr "Logout"
+
+#: templates/base.html:30 templates/modals.html:21 templates/modals.html:31
+msgid "Register"
+msgstr "Register"
+
+#: templates/base.html:31
+msgid "Sign In"
+msgstr "Sign In"
+
+#: templates/base.html:40
+msgid "Personal Settings"
+msgstr "Personal Settings"
+
+#: templates/base.html:42
+msgid "Language Settings"
+msgstr "Language Settings"
+
+#: templates/base.html:52
+msgid "All Rights Reserved."
+msgstr "All Rights Reserved."
+
+#: templates/base.html:54
+msgid "If you have any questions, please contact us at"
+msgstr "If you have any questions, please contact us at"
+
+#: templates/concert_detail.html:3
+msgid "Details"
+msgstr "Details"
+
+#: templates/concert_detail.html:5
+msgid "Concert Detail"
+msgstr "Concert Detail"
+
+#: templates/concert_detail.html:16
+msgid "Cover"
+msgstr "Cover"
+
+#: templates/concert_detail.html:20
+msgid "Artist:"
+msgstr "Artist:"
+
+#: templates/concert_detail.html:21
+msgid "Venue:"
+msgstr "Venue:"
+
+#: templates/concert_detail.html:22 templates/concerts.html:23
+msgid "City:"
+msgstr "City:"
+
+#: templates/concert_detail.html:24 templates/concerts.html:19
+msgid "Date:"
+msgstr "Date:"
+
+#: templates/concert_detail.html:29
+msgid "Select Ticket Type:"
+msgstr "Select Ticket Type:"
+
+#: templates/concert_detail.html:33
+msgid "Regular"
+msgstr "Regular"
+
+#: templates/concert_detail.html:37
+msgid "Select Quantity:"
+msgstr "Select Quantity:"
+
+#: templates/concert_detail.html:40
+msgid "Buy Tickets"
+msgstr "Buy Tickets"
+
+#: templates/concerts.html:3 templates/concerts.html:5
+msgid "Available Concerts"
+msgstr "Available Concerts"
+
+#: templates/concerts.html:17
+msgid "by"
+msgstr "by"
+
+#: templates/concerts.html:27
+msgid "VIP:"
+msgstr "VIP:"
+
+#: templates/concerts.html:28
+msgid "Regular:"
+msgstr "Regular:"
+
+#: templates/concerts.html:30
+msgid "View Details"
+msgstr "View Details"
+
+#: templates/concerts.html:38
+msgid "Previous"
+msgstr "Previous"
+
+#: templates/concerts.html:54
+msgid "Next"
+msgstr "Next"
+
+#: templates/index.html:2
+msgid "Home"
+msgstr "Home"
+
+#: templates/index.html:12
+msgid "Concert Tickets"
+msgstr "Concert Tickets"
+
+#: templates/index.html:15
+msgid "Flight Tickets"
+msgstr "Flight Tickets"
+
+#: templates/index.html:20
+msgid "Promotions and Popular Events"
+msgstr "Promotions and Popular Events"
+
+#: templates/index.html:29 templates/index.html:45
+msgid "Flight Image"
+msgstr "Flight Image"
+
+#: templates/index.html:35 templates/index.html:51
+msgid "Concert Image"
+msgstr "Concert Image"
+
+#: templates/index.html:40
+msgid "Movie Image"
+msgstr "Movie Image"
+
+#: templates/modals.html:5 templates/modals.html:11
+msgid "Login"
+msgstr "Login"
+
+#: templates/modals.html:7 templates/modals.html:23
+msgid "Username:"
+msgstr "Username:"
+
+#: templates/modals.html:9 templates/modals.html:27
+msgid "Password:"
+msgstr "Password:"
+
+#: templates/modals.html:25 templates/modals.html:43
+msgid "Email:"
+msgstr "Email:"
+
+#: templates/modals.html:29
+msgid "Confirm Password:"
+msgstr "Confirm Password:"
+
+#: templates/modals.html:41
+msgid "User Information Settings"
+msgstr "User Information Settings"
+
+#: templates/modals.html:45
+msgid "Current Password:"
+msgstr "Current Password:"
+
+#: templates/modals.html:47
+msgid "New Password:"
+msgstr "New Password:"
+
+#: templates/modals.html:49
+msgid "Confirm New Password:"
+msgstr "Confirm New Password:"
+
+#: templates/modals.html:51
+msgid "Save Settings"
+msgstr "Save Settings"
+
+#: templates/modals.html:61
+msgid "Success"
+msgstr "Success"
+
+#: templates/modals.html:62
+msgid "Your ticket purchase was successful!"
+msgstr "Your ticket purchase was successful!"
+
+#: templates/modals.html:63
+msgid "OK"
+msgstr "OK"
+
+#: templates/modals.html:71
+msgid "Select Language"
+msgstr "Select Language"
+
+#: templates/modals.html:72
+msgid "Please choose your preferred language:"
+msgstr "Please choose your preferred language:"
+
+#: templates/modals.html:73
+msgid "English"
+msgstr "English"
+
+#: templates/modals.html:74
+msgid "Māori"
+msgstr "Māori"

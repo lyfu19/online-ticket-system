@@ -1,19 +1,23 @@
-{% extends "base.html" %} {% block title %}Home - Online Ticketing System{%
-endblock %} {% block extra_css %}
+{% extends "base.html" %} 
+{% block title %}{{ _('Home') }} - {{ _('Online Ticketing System') }}{% endblock %}
+
+{% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
-{% endblock %} {% block content %}
+{% endblock %} 
+
+{% block content %}
 <!-- 票务类型导航 -->
 <div class="category-nav">
   <a href="{{ url_for('concerts', page=1) }}">
-    <i class="fas fa-music"></i> Concert Tickets
+    <i class="fas fa-music"></i> {{ _('Concert Tickets') }}
   </a>
   <a href="javascript:void(0);" onclick="showPlaceholder()">
-    <i class="fas fa-plane"></i> Flight Tickets
+    <i class="fas fa-plane"></i> {{ _('Flight Tickets') }}
   </a>
 </div>
 <!-- 主体内容 -->
 <div class="main-content">
-  <h2>Promotions and Popular Events</h2>
+  <h2>{{ _('Promotions and Popular Events') }}</h2>
 
   <!-- 轮播内容 -->
   <div class="carousel">
@@ -22,29 +26,29 @@ endblock %} {% block extra_css %}
       <div class="slide">
         <img
           src="https://www.usatoday.com/gcdn/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg"
-          alt="Flight Image" />
+          alt="{{ _('Flight Image') }}" />
       </div>
       <!-- 实际内容的第一张 -->
       <div class="slide">
         <img
           src="https://www.sportshub.com.sg/sites/default/files/styles/coh_large_super_landscape/public/2024-05/WEB1200x675_0.jpg?h=c74750f6&itok=WPQJPUs3"
-          alt="Concert Image" />
+          alt="{{ _('Concert Image') }}" />
       </div>
       <div class="slide">
         <img
           src="https://www.komar.de/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/I/A/IADX4-079.jpg"
-          alt="Movie Image" />
+          alt="{{ _('Movie Image') }}" />
       </div>
       <div class="slide">
         <img
           src="https://www.usatoday.com/gcdn/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg"
-          alt="Flight Image" />
+          alt="{{ _('Flight Image') }}" />
       </div>
       <!-- 真实的第一张幻灯片的副本 -->
       <div class="slide">
         <img
           src="https://www.sportshub.com.sg/sites/default/files/styles/coh_large_super_landscape/public/2024-05/WEB1200x675_0.jpg?h=c74750f6&itok=WPQJPUs3"
-          alt="Concert Image" />
+          alt="{{ _('Concert Image') }}" />
       </div>
     </div>
 
@@ -52,6 +56,8 @@ endblock %} {% block extra_css %}
     <button class="next" onclick="moveSlide(1)">&#10095;</button>
   </div>
 </div>
-{% endblock %} {% block extra_js %}
+{% endblock %} 
+
+{% block extra_js %}
 <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
 {% endblock %}
