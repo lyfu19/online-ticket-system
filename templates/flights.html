@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+
+{% set nav_title = _('Flight Search') %}
+
+{% block title %}{{ _('Search Flights') }}{% endblock %}
+
+{% block content %}
+<section class="flight-search-page">
+    <div class="flight-search-container">
+        <h1>{{ _('Search for Flights') }}</h1>
+        <form class="flight-search-form" id="flightSearchForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="departure">{{ _('From:') }}</label>
+                    <select id="departure" name="departure" required>
+                        <option value="" disabled selected>{{ _('Select departure') }}</option>
+                        {% for airport in airports %}
+                        <option value="{{ airport.code }}">{{ airport.name }} ({{ airport.code }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="arrival">{{ _('To:') }}</label>
+                    <select id="arrival" name="arrival" required>
+                        <option value="" disabled selected>{{ _('Select arrival') }}</option>
+                        {% for airport in airports %}
+                        <option value="{{ airport.code }}">{{ airport.name }} ({{ airport.code }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">{{ _('Date:') }}</label>
+                    <div class="date-input-wrapper">
+                        <input type="date" id="date" name="date" required min="{{ today }}">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="search">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary">{{ _('Search Flights') }}</button>
+                </div>
+            </div>
+        </form>
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+    </div>
+    <div id="searchResults" class="search-results notion-style">
+        <p class="no-results">{{ _('Enter your search criteria and click "Search Flights" to find available flights.') }}</p>
+    </div>
+</section>
+
+<!-- 确认预订模态框 -->
+<div id="confirmBookingModal" class="confirm-booking-modal">
+    <div class="confirm-booking-content">
+        <h2>{{ _('Confirm Booking') }}</h2>
+        <div id="flightDetails">
+            <!-- 这里将动态填充航班详情 -->
+        </div>
+        <div class="confirm-booking-actions">
+            <button id="cancelBookingBtn" class="btn btn-secondary">{{ _('Cancel') }}</button>
+            <button id="confirmBookingBtn" class="btn btn-primary">{{ _('Confirm Booking') }}</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('flightSearchForm');
+        const searchResults = document.getElementById('searchResults');
+        const errorMessage = document.getElementById('errorMessage');
+        const departureSelect = document.getElementById('departure');
+        const arrivalSelect = document.getElementById('arrival');
+        const confirmModal = document.getElementById('confirmBookingModal');
+        const confirmButton = document.getElementById('confirmBookingBtn');
+        const cancelButton = document.getElementById('cancelBookingBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (departureSelect.value === arrivalSelect.value) {
+                errorMessage.textContent = "{{ _('Departure and arrival airports cannot be the same. Please choose different airports.') }}";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            errorMessage.style.display = 'none';
+
+            const formData = {
+                departure: departureSelect.value,
+                arrival: arrivalSelect.value,
+                date: document.getElementById('date').value
+            };
+
+            fetch('/search_flights', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    searchResults.innerHTML = '<p class="no-results">{{ _("No flights found for the selected criteria.") }}</p>';
+                } else {
+                    let resultsHtml = '<h2>{{ _("Search Results") }}</h2>';
+                    data.forEach(flight => {
+                        resultsHtml += `
+                            <div class="flight-result">
+                                <div class="flight-header">
+                                    <h3>${flight.airline} - {{ _("Flight") }} ${flight.flight_number}</h3>
+                                </div>
+                                <div class="flight-details">
+                                    <div class="flight-info">
+                                        <span class="info-icon">🛫</span>
+                                        <span>${departureSelect.options[departureSelect.selectedIndex].text} {{ _("at") }} ${flight.departure_time}</span>
+                                    </div>
+                                    <div class="flight-info">
+                                        <span class="info-icon">🛬</span>
+                                        <span>${arrivalSelect.options[arrivalSelect.selectedIndex].text} {{ _("at") }} ${flight.arrival_time}</span>
+                                    </div>
+                                    <div class="flight-info">
+                                        <span class="info-icon">💺</span>
+                                        <span>{{ _("Economy:") }} $${flight.economy_price.toFixed(2)} (${flight.available_economy_seats} {{ _("seats") }})</span>
+                                    </div>
+                                    <div class="flight-info">
+                                        <span class="info-icon">💺</span>
+                                        <span>{{ _("Business:") }} $${flight.business_price.toFixed(2)} (${flight.available_business_seats} {{ _("seats") }})</span>
+                                    </div>
+                                </div>
+                                <div class="flight-actions">
+                                    <div class="cabin-selection">
+                                        <label>
+                                            <input type="radio" name="cabin-${flight.id}" value="economy" checked> {{ _("Economy") }}
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="cabin-${flight.id}" value="business"> {{ _("Business") }}
+                                        </label>
+                                    </div>
+                                    <button class="btn btn-secondary book-flight" data-flight-id="${flight.id}">{{ _('Book Now') }}</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    searchResults.innerHTML = resultsHtml;
+
+                    // 为所有的 "Book Now" 按钮添加事件监听器
+                    document.querySelectorAll('.book-flight').forEach(button => {
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const flightId = this.getAttribute('data-flight-id');
+                            bookFlight(flightId);
+                        });
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                searchResults.innerHTML = '<p class="no-results">{{ _("An error occurred while searching for flights. Please try again.") }}</p>';
+            });
+        });
+
+        let pendingBookingInfo = null;
+
+        function bookFlight(flightId) {
+            const cabinType = document.querySelector(`input[name="cabin-${flightId}"]:checked`).value;
+            
+            // 每次调用时检查登录状态
+            fetch('/check_login')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.is_logged_in) {
+                        showConfirmBookingModal(flightId, cabinType);
+                    } else {
+                        pendingBookingInfo = { flightId, cabinType };
+                        showLoginModal();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('{{ _("An error occurred while checking login status:") }} ' + error.message);
+                });
+        }
+
+        function showConfirmBookingModal(flightId, cabinType) {
+            const flight = findFlightById(flightId);
+            if (!flight) {
+                console.error('Flight not found');
+                return;
+            }
+
+            const price = cabinType === 'economy' ? flight.economy_price : flight.business_price;
+            const flightDetails = `
+                <p><strong>{{ _("Flight:") }}</strong> ${flight.airline} - ${flight.flight_number}</p>
+                <p><strong>{{ _("From:") }}</strong> ${departureSelect.options[departureSelect.selectedIndex].text}</p>
+                <p><strong>{{ _("To:") }}</strong> ${arrivalSelect.options[arrivalSelect.selectedIndex].text}</p>
+                <p><strong>{{ _("Departure:") }}</strong> ${flight.departure_time}</p>
+                <p><strong>{{ _("Arrival:") }}</strong> ${flight.arrival_time}</p>
+                <p><strong>{{ _("Cabin:") }}</strong> ${cabinType.charAt(0).toUpperCase() + cabinType.slice(1)}</p>
+                <p><strong>{{ _("Price:") }}</strong> $${price.toFixed(2)}</p>
+            `;
+            
+            document.getElementById('flightDetails').innerHTML = flightDetails;
+            confirmModal.style.display = 'block';
+            
+            confirmButton.onclick = function() {
+                // 用户确认预订,发送请求到后端
+                fetch('/book_flight', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        flight_id: flightId,
+                        seat_type: cabinType
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // 重定向到预订成功页面
+                        window.location.href = data.redirect_url;
+                    } else {
+                        alert('{{ _("Booking failed:") }} ' + data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('{{ _("An error occurred. Please try again later.") }}');
+                });
+                
+                confirmModal.style.display = 'none';
+            };
+            
+            cancelButton.onclick = function() {
+                confirmModal.style.display = 'none';
+            };
+        }
+
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        // 修改登录成功后的回调函数
+        window.onLoginSuccess = function() {
+            // 隐藏登录模态框
+            document.getElementById('loginModal').style.display = 'none';
+            // 如果有待处理的预订，继续预订流程
+            if (pendingBookingInfo) {
+                showConfirmBookingModal(pendingBookingInfo.flightId, pendingBookingInfo.cabinType);
+                pendingBookingInfo = null;
+            }
+        };
+
+        // 为所有的 "Book Now" 按钮添加事件监听器
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('book-flight')) {
+                e.preventDefault();
+                const flightId = e.target.getAttribute('data-flight-id');
+                bookFlight(flightId);
+            }
+        });
+
+        function findFlightById(flightId) {
+            const flightElements = document.querySelectorAll('.flight-result');
+            for (let element of flightElements) {
+                const bookButton = element.querySelector('.book-flight');
+                if (bookButton && bookButton.getAttribute('data-flight-id') === flightId) {
+                    const flightInfo = {
+                        id: flightId,
+                        airline: element.querySelector('.flight-header h3').textContent.split(' - ')[0],
+                        flight_number: element.querySelector('.flight-header h3').textContent.split(' - ')[1].replace('{{ _("Flight") }} ', ''),
+                        departure_time: element.querySelector('.flight-info:nth-child(1) span:last-child').textContent.split('{{ _("at") }} ')[1],
+                        arrival_time: element.querySelector('.flight-info:nth-child(2) span:last-child').textContent.split('{{ _("at") }} ')[1],
+                        economy_price: parseFloat(element.querySelector('.flight-info:nth-child(3) span:last-child').textContent.split('$')[1].split(' ')[0]),
+                        business_price: parseFloat(element.querySelector('.flight-info:nth-child(4) span:last-child').textContent.split('$')[1].split(' ')[0])
+                    };
+                    return flightInfo;
+                }
+            }
+            return null;
+        }
+    });
+</script>
+{% endblock %}

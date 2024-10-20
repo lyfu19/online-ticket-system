@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% set nav_title = _('Event Details') %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block content %}
+<section class="event-detail-page">
+    <div class="event-detail-card">
+        <div class="event-detail-header">
+            <h1 class="event-detail-title">{{ event.title }}</h1>
+            {% if event.image_url %}
+            <div class="event-detail-image-container">
+                <img src="{{ event.image_url }}" alt="{{ event.title }}" class="event-image">
+            </div>
+            {% endif %}
+        </div>
+        <div class="event-detail-content">
+            <div class="event-detail-info">
+                <div class="info-row">
+                    <div class="info-item">
+                        <span class="emoji">📅</span>
+                        <div class="info-content">
+                            <span class="info-label">{{ _('Date') }}</span>
+                            <span class="info-value">{{ event.date.strftime('%B %d, %Y') }}</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="emoji">⏰</span>
+                        <div class="info-content">
+                            <span class="info-label">{{ _('Time') }}</span>
+                            <span class="info-value">{{ event.date.strftime('%I:%M %p') }}</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="emoji">💰</span>
+                        <div class="info-content">
+                            <span class="info-label">{{ _('Price') }}</span>
+                            <span class="info-value">${{ "%.2f"|format(event.price) }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-item full-width">
+                        <span class="emoji">📍</span>
+                        <div class="info-content">
+                            <span class="info-label">{{ _('Location') }}</span>
+                            <span class="info-value">{{ event.address }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="event-detail-description">
+                <h2>{{ _('Description') }}</h2>
+                <p>{{ event.description }}</p>
+            </div>
+            <div class="event-detail-full-description">
+                <h2>{{ _('Event Details') }}</h2>
+                <p>{{ event.details }}</p>
+            </div>
+            <div class="booking-section">
+                <div class="ticket-quantity">
+                    <label for="ticket-count">{{ _('Tickets') }}:</label>
+                    <div class="quantity-control">
+                        <button class="quantity-btn" id="decreaseQuantity">-</button>
+                        <input type="number" id="ticket-count" name="ticket-count" min="1" value="1" readonly>
+                        <button class="quantity-btn" id="increaseQuantity">+</button>
+                    </div>
+                </div>
+                <div class="book-now-wrapper">
+                    <button class="btn btn-primary" id="bookNowBtn">{{ _('Book Now') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 确认预订模态框 -->
+<div id="confirmEventBookingModal" class="confirm-event-booking-modal">
+    <div class="confirm-event-booking-content">
+        <h2>{{ _('Confirm Booking') }}</h2>
+        <div id="eventDetails">
+            <!-- 这里将动态填充事件详情 -->
+        </div>
+        <div class="confirm-event-booking-actions">
+            <button id="cancelEventBookingBtn" class="btn btn-secondary">{{ _('Cancel') }}</button>
+            <button id="confirmEventBookingBtn" class="btn btn-primary">{{ _('Confirm Booking') }}</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- 使用 tojson 将数据和翻译文本传递到前端 -->
+<script id="eventData" type="application/json">
+{{ {
+    "eventPrice": event.price,
+    "eventTitle": event.title,
+    "eventDate": event.date.strftime('%Y-%m-%d %H:%M'),
+    "eventLocation": event.address,
+    "eventId": event.id,
+    "translations": {
+        "event": _('Event'),
+        "date": _('Date'),
+        "location": _('Location'),
+        "quantity": _('Quantity'),
+        "totalPrice": _('Total Price'),
+        "bookingFailed": _('Booking failed')
+    }
+} | tojson }}
+</script>
+
+<!-- 引入外部JS -->
+<script src="{{ url_for('static', filename='js/event_detail.js') }}"></script>
+{% endblock %}

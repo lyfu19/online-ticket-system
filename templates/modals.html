@@ -1,76 +1,51 @@
-<!-- 登录模态框 -->
-<div class="modal" id="loginModal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('login')">&times;</span>
-    <h2>{{ _('Login') }}</h2>
-    <form id="loginForm">
-      <label for="loginUsername">{{ _('Username:') }}</label>
-      <input type="text" id="loginUsername" name="username" required />
-      <label for="loginPassword">{{ _('Password:') }}</label>
-      <input type="password" id="loginPassword" name="password" required />
-      <button type="submit">{{ _('Login') }}</button>
-    </form>
-    <div id="loginMessage"></div>
-  </div>
+<div id="languageModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>{{ _('Select Language') }}</h2>
+        <a href="#" onclick="changeLanguage('en')">{{ _('English') }}</a>
+        <a href="#" onclick="changeLanguage('mi')">{{ _('Te Reo Māori') }}</a>
+    </div>
 </div>
 
-<!-- 注册模态框 -->
-<div class="modal" id="registerModal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('register')">&times;</span>
-    <h2>{{ _('Register') }}</h2>
-    <form id="registerForm">
-      <label for="registerUsername">{{ _('Username:') }}</label>
-      <input type="text" id="registerUsername" name="username" required />
-      <label for="registerEmail">{{ _('Email:') }}</label>
-      <input type="email" id="registerEmail" name="email" required />
-      <label for="registerPassword">{{ _('Password:') }}</label>
-      <input type="password" id="registerPassword" name="password" required />
-      <label for="registerConfirmPassword">{{ _('Confirm Password:') }}</label>
-      <input type="password" id="registerConfirmPassword" name="confirmPassword" required />
-      <button type="submit" id="registerButton" disabled>{{ _('Register') }}</button>
-    </form>
-    <div id="registerMessage"></div>
-  </div>
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>{{ _('Log in') }}</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="email" id="login-email" name="email" placeholder="{{ _('Email') }}" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="login-password" name="password" placeholder="{{ _('Password') }}" required>
+            </div>
+            <div id="login-error" class="error-message"></div>
+            <button type="submit" class="btn">{{ _('Continue') }}</button>
+        </form>
+        <div class="login-options">
+            <a href="#">{{ _('Forgot password?') }}</a> · <a href="#" id="switch-to-register">{{ _('Sign up') }}</a>
+        </div>
+    </div>
 </div>
 
-<!-- 设置模态框 -->
-<div class="modal" id="settingsModal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('settings')">&times;</span>
-    <h2>{{ _('User Information Settings') }}</h2>
-    <form id="settingForm">
-      <label for="settingsEmail">{{ _('Email:') }}</label>
-      <input type="email" id="settingsEmail" name="email" value="{{ current_user.email }}" required />
-      <label for="settingsCurrentPassword">{{ _('Current Password:') }}</label>
-      <input type="password" id="settingsCurrentPassword" name="current_password" required />
-      <label for="settingsNewPassword">{{ _('New Password:') }}</label>
-      <input type="password" id="settingsNewPassword" name="new_password" />
-      <label for="settingsConfirmPassword">{{ _('Confirm New Password:') }}</label>
-      <input type="password" id="settingsConfirmPassword" name="confirm_password" />
-      <button type="submit" id="save_settings" disabled>{{ _('Save Settings') }}</button>
-    </form>
-    <div id="settingMessage"></div>
-  </div>
-</div>
-
-<!-- 购票成功的模态框 -->
-<div class="modal" id="successModal">
-  <div class="modal-content">
-      <span class="close" onclick="closeModal('successModal')">&times;</span>
-      <h2>{{ _('Success') }}</h2>
-      <p>{{ _('Your ticket purchase was successful!') }}</p>
-      <button class="primary-button" onclick="closeModal('successModal')">{{ _('OK') }}</button>
-  </div>
-</div>
-
-<!-- 语言切换的模态框 -->
-<div class="modal" id="languageModal">
-  <div class="modal-content">
-      <span class="close" onclick="closeModal('languageModal')">&times;</span>
-      <h2>{{ _('Select Language') }}</h2>
-      <p>{{ _('Please choose your preferred language:') }}</p>
-      <button class="primary-button" onclick="setLanguage('en')">{{ _('English') }}</button>
-      <button class="primary-button" onclick="setLanguage('mi')">{{ _('Māori') }}</button>
-  </div>
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>{{ _('Sign up') }}</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <input type="email" id="register-email" name="email" placeholder="{{ _('Email') }}" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="register-password" name="password" placeholder="{{ _('Password') }}" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="{{ _('Confirm password') }}" required>
+            </div>
+            <div id="register-error" class="error-message"></div>
+            <button type="submit" class="btn">{{ _('Sign up') }}</button>
+        </form>
+        <div class="login-options">
+            {{ _('Already have an account?') }} <a href="#" id="switch-to-login">{{ _('Log in') }}</a>
+        </div>
+    </div>
 </div>

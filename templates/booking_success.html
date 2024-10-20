@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% set nav_title = _('Booking Successful') %}
+
+{% block title %}{{ _('Booking Successful') }}{% endblock %}
+
+{% block content %}
+<section class="booking-success-page">
+    <div class="booking-success-card">
+        <h1>{{ _('Booking Successful!') }}</h1>
+        <div class="booking-details">
+            <h2>{{ booking.event.title }}</h2>
+            <p><strong>{{ _('Date') }}:</strong> {{ booking.event.date.strftime('%B %d, %Y at %I:%M %p') }}</p>
+            <p><strong>{{ _('Location') }}:</strong> {{ booking.event.address }}</p>
+            <p><strong>{{ _('Quantity') }}:</strong> {{ booking.quantity }}</p>
+            <p><strong>{{ _('Total Price') }}:</strong> ${{ "%.2f"|format(booking.quantity * booking.event.price) }}</p>
+            <p><strong>{{ _('Booking ID') }}:</strong> {{ booking.id }}</p>
+        </div>
+        <p class="thank-you-message">{{ _('Thank you for your booking. We look forward to seeing you at the event!') }}</p>
+        <a href="{{ url_for('event.events') }}" class="btn btn-primary">{{ _('Back to Events') }}</a>
+    </div>
+</section>
+{% endblock %}

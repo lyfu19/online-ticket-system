@@ -1,63 +1,36 @@
-{% extends "base.html" %} 
-{% block title %}{{ _('Home') }} - {{ _('Online Ticketing System') }}{% endblock %}
+{% extends "base.html" %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
-{% endblock %} 
+{% set nav_title = _('NZ Maori Experience') %}
 
 {% block content %}
-<!-- 票务类型导航 -->
-<div class="category-nav">
-  <a href="{{ url_for('concerts', page=1) }}">
-    <i class="fas fa-music"></i> {{ _('Concert Tickets') }}
-  </a>
-  <a href="javascript:void(0);" onclick="showPlaceholder()">
-    <i class="fas fa-plane"></i> {{ _('Flight Tickets') }}
-  </a>
-</div>
-<!-- 主体内容 -->
-<div class="main-content">
-  <h2>{{ _('Promotions and Popular Events') }}</h2>
+<section class="hero">
+    <h1>{{ _('Welcome to New Zealand Maori Experience') }}</h1>
+    <p>{{ _('Discover the rich culture and traditions of the Maori people') }}</p>
+</section>
 
-  <!-- 轮播内容 -->
-  <div class="carousel">
-    <div class="slides">
-      <!-- 轮播图片内容 -->
-      <div class="slide">
-        <img
-          src="https://www.usatoday.com/gcdn/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg"
-          alt="{{ _('Flight Image') }}" />
-      </div>
-      <!-- 实际内容的第一张 -->
-      <div class="slide">
-        <img
-          src="https://www.sportshub.com.sg/sites/default/files/styles/coh_large_super_landscape/public/2024-05/WEB1200x675_0.jpg?h=c74750f6&itok=WPQJPUs3"
-          alt="{{ _('Concert Image') }}" />
-      </div>
-      <div class="slide">
-        <img
-          src="https://www.komar.de/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/I/A/IADX4-079.jpg"
-          alt="{{ _('Movie Image') }}" />
-      </div>
-      <div class="slide">
-        <img
-          src="https://www.usatoday.com/gcdn/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg"
-          alt="{{ _('Flight Image') }}" />
-      </div>
-      <!-- 真实的第一张幻灯片的副本 -->
-      <div class="slide">
-        <img
-          src="https://www.sportshub.com.sg/sites/default/files/styles/coh_large_super_landscape/public/2024-05/WEB1200x675_0.jpg?h=c74750f6&itok=WPQJPUs3"
-          alt="{{ _('Concert Image') }}" />
-      </div>
+<section class="booking-options">
+    <div class="booking-card">
+        <h2>{{ _('Maori Cultural Events') }}</h2>
+        <p>{{ _('Book tickets for authentic Maori experiences') }}</p>
+        <a href="{{ url_for('event.events') }}" class="btn">{{ _('Book Now') }}</a>
     </div>
+    <div class="booking-card">
+        <h2>{{ _('Flight Tickets') }}</h2>
+        <p>{{ _('Find the best deals on flights to New Zealand') }}</p>
+        <a href="{{ url_for('flight.flights') }}" class="btn">{{ _('Book Flights') }}</a>
+    </div>
+</section>
 
-    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-    <button class="next" onclick="moveSlide(1)">&#10095;</button>
-  </div>
-</div>
-{% endblock %} 
-
-{% block extra_js %}
-<script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+<section class="maori-culture">
+    <h2>{{ _('Maori Culture') }}</h2>
+    <p>{{ _('The Maori are the indigenous Polynesian people of mainland New Zealand. They have a rich history and culture that dates back over 1000 years. Maori culture is an integral part of New Zealand\'s identity and offers visitors a unique and enriching experience.') }}</p>  <!-- 文化描述 -->
+    <p>{{ _('Some key aspects of Maori culture include:') }}</p>
+    <ul>
+        <li>{{ _('Traditional performances like the haka') }}</li>
+        <li>{{ _('Intricate wood carvings and tattoo art (Ta moko)') }}</li>
+        <li>{{ _('Marae (meeting grounds) and their protocols') }}</li>
+        <li>{{ _('Hangi, a traditional method of cooking food') }}</li>
+    </ul>
+    <a href="{{ url_for('misc.maori_culture') }}" class="btn-outline-green">{{ _('Learn More') }}</a>
+</section>
 {% endblock %}

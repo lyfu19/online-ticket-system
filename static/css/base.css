@@ -1,0 +1,53 @@
+.error-message {
+  color: #eb5757;
+  font-size: 14px;
+  margin-top: 8px;
+  display: none;
+  background-color: #fef1f1;
+  border: 1px solid #eb5757;
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+
+nav {
+  transition: all 0.3s ease;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+#welcome-message {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 14px;
+  color: #2c3e50;
+  margin-right: 20px;
+  font-weight: 600;
+  font-style: italic;
+  display: none;
+  align-items: center;
+  padding: 4px 10px;
+  background-color: #ecf0f1;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+#welcome-message:hover {
+  background-color: #d6dbdf;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#welcome-message::before {
+  content: "👋";
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.nav-placeholder {
+  width: 0;
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,1532 @@
+:root {
+    --primary-color: #2f3437;
+    --secondary-color: #37352f;
+    --background-color: #ffffff;
+    --text-color: #37352f;
+    --accent-color: #4CAF50;  /* 更浅的绿色 */
+    --accent-hover-color: #45a049;  /* 悬停时的颜色 */
+    --light-gray: #ebeced;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--white);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    flex: 1;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 3rem 2rem;
+}
+
+.hero h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.booking-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.booking-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 3px;
+    border: 1px solid var(--light-gray);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.booking-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.btn:hover {
+    background-color: #c85751; /* 稍深的红色 */
+}
+
+.maori-culture {
+    background-color: var(--white);
+    padding: 3rem;
+    border-radius: 3px;
+    border: 1px solid var(--light-gray);
+}
+
+.maori-culture h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+footer {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .booking-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 保留之前的CSS代码,并在文件末尾添加以下内容 */
+
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.language-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--white);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    border-radius: 3px;
+    border: 1px solid var(--light-gray);
+}
+
+.language-dropdown-content a {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.language-dropdown-content a:hover {
+    background-color: var(--light-gray);
+}
+
+.language-dropdown:hover .language-dropdown-content {
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(15, 15, 15, 0.6);
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 10% auto;
+    padding: 2.5rem;
+    border: 1px solid var(--light-gray);
+    width: 360px;
+    border-radius: 3px;
+    box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 3px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.modal-content .btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.6rem;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.login-options {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-options a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.login-options a:hover {
+    text-decoration: underline;
+}
+
+/* 修改 .btn 样式 */
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.btn:hover {
+    background-color: #c85751; /* 稍深的红色 */
+}
+
+/* 修改 .modal-content .btn 样式 */
+.modal-content .btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.6rem;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+/* 如果需要,可以为按钮添加焦点样式 */
+.btn:focus {
+    box-shadow: 0 0 0 2px rgba(225, 98, 89, 0.5); /* 使用 accent-color 的半透明版本 */
+}
+
+/* 添加这个新的按钮样式 */
+.btn-outline {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.events-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.event-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.event-card h2 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+.event-card p {
+    margin: 10px 0;
+}
+
+.event-card .btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.event-card .btn:hover {
+    background-color: #2980b9;
+}
+
+/* Notion-style Event List */
+.notion-style {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.event-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.event-card:hover {
+    background-color: #f7f6f3;
+}
+
+.event-header {
+    margin-bottom: 8px;
+}
+
+.event-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #37352f;
+    margin: 0;
+}
+
+.event-description {
+    font-size: 14px;
+    color: #4d4d4d;
+    margin-bottom: 12px;
+}
+
+.event-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.event-detail {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #4d4d4d;
+    margin-right: 16px;
+}
+
+.detail-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.event-card .btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.event-card .btn:hover {
+    background-color: #c85751;
+}
+
+/* Notion-style Pagination */
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.pagination-info {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 6px;
+    margin: 0 2px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.pagination-link:hover:not(.disabled):not(.active) {
+    background-color: var(--accent-hover-color);
+    color: var(--white);
+}
+
+.pagination-link.active {
+    color: var(--white);
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.pagination-link.disabled {
+    color: var(--light-gray);
+    cursor: not-allowed;
+}
+
+.pagination-ellipsis {
+    margin: 0 2px;
+    color: var(--text-color);
+}
+
+/* Event Detail Page Styles */
+.event-detail-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.event-detail-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.event-detail-header {
+    position: relative;
+    background-color: #f7f6f3;
+    padding: 24px;
+    text-align: center;
+}
+
+.event-detail-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #37352f;
+    margin-bottom: 16px;
+}
+
+.event-detail-image-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 24px;
+}
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.event-detail-content {
+    padding: 24px;
+}
+
+.event-detail-info {
+    margin-bottom: 24px;
+    background-color: #f7f6f3;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-bottom: 8px;
+}
+
+.info-item i {
+    font-size: 24px;
+    margin-right: 12px;
+    color: #e16259;
+    width: 24px;
+    text-align: center;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-size: 16px;
+    color: #37352f;
+    font-weight: 500;
+}
+
+.event-detail-description h2,
+.event-detail-full-description h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #37352f;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.event-detail-description p,
+.event-detail-full-description p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4d4d4d;
+}
+
+.event-detail-btn {
+    display: inline-block;
+    background-color: #e16259;
+    color: #ffffff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 24px;
+}
+
+.event-detail-btn:hover {
+    background-color: #c85751;
+}
+
+@media (max-width: 768px) {
+    .info-row {
+        flex-direction: column;
+    }
+
+    .info-item {
+        margin-bottom: 16px;
+    }
+
+    .info-item:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* 更新 .emoji 样式 */
+.emoji {
+    font-size: 24px;
+    margin-right: 12px;
+    display: inline-block;
+    width: 24px;
+    text-align: center;
+}
+
+/* 更新 .info-item 样式 */
+.info-item {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-bottom: 8px;
+}
+
+.info-item.full-width {
+    flex-basis: 100%;
+}
+
+/* 更新 .info-content 样式 */
+.info-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* 更新 .info-label 和 .info-value 样式 */
+.info-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-size: 16px;
+    color: #37352f;
+    font-weight: 500;
+}
+
+/* 在文件末尾添加以下样式 */
+
+.booking-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    background-color: #f7f6f3;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.ticket-quantity {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;  /* 允许票数选择器占据更多空间 */
+    margin-right: 16px;  /* 在票数选择器和按钮之间添加一些间距 */
+}
+
+.ticket-quantity label {
+    margin-right: 12px;
+    font-size: 16px;
+    color: #37352f;
+    font-weight: 500;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.quantity-btn {
+    background-color: #f0f0f0;
+    border: none;
+    color: #37352f;
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+    background-color: #e0e0e0;
+}
+
+#ticket-count {
+    width: 40px;
+    height: 32px;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #37352f;
+    -moz-appearance: textfield;  /* Firefox */
+    -webkit-appearance: textfield; /* Safari and Chrome */
+    appearance: textfield;  /* Standard */
+}
+
+#ticket-count::-webkit-inner-spin-button, 
+#ticket-count::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.btn-primary {
+    padding: 10px 36px;  /* 增加水平方向的内边距 */
+    font-size: 16px;
+    font-weight: 500;
+    min-width: 150px;  /* 设置最小宽度 */
+}
+
+/* 添加新的样式用于包装按钮 */
+.book-now-wrapper {
+    flex-shrink: 0;  /* 防止按钮被压缩 */
+}
+
+/* 在文件末尾添加以下样式 */
+#ticket-count::-webkit-inner-spin-button, 
+#ticket-count::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#ticket-count {
+    -moz-appearance: textfield;  /* Firefox */
+    -webkit-appearance: textfield; /* Safari and Chrome */
+    appearance: textfield;  /* Standard */
+}
+
+/* 在文件末尾添加以下样式 */
+.booking-success-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.booking-success-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-success-card h1 {
+    color: #4CAF50;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.booking-details {
+    margin-bottom: 20px;
+}
+
+.booking-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.booking-details p {
+    margin: 5px 0;
+}
+
+.thank-you-message {
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.booking-success-card .btn {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* 更新按钮样式 */
+.btn, .btn-primary {
+    background-color: var(--accent-color);
+    color: var(--white);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover, .btn-primary:hover {
+    background-color: var(--accent-hover-color);
+    color: var(--white);
+}
+
+/* 更新链接样式 */
+a {
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-hover-color);
+}
+
+/* 更新导航栏链接样式 */
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+/* 更新分页控件样式 */
+.pagination-link.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--white);
+}
+
+.pagination-link:hover:not(.disabled):not(.active) {
+    background-color: var(--accent-hover-color);
+    color: var(--white);
+}
+
+/* 更新事件卡片中的图标颜色 */
+.event-card .detail-icon,
+.info-item i,
+.emoji {
+    color: var(--accent-color);
+}
+
+/* 更新模态框中的按钮样式 */
+.modal-content .btn {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.modal-content .btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* 更新购买成功页面的标题颜色 */
+.booking-success-card h1 {
+    color: var(--accent-color);
+}
+
+/* 更新数量控制按钮样式 */
+.quantity-btn {
+    background-color: var(--accent-color);
+    color: var(--white);
+    transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* 确保所有按钮在禁用状态下的样式一致 */
+.btn:disabled, .btn-primary:disabled, .quantity-btn:disabled {
+    background-color: var(--light-gray);
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* 更新事件详情页的按钮样式 */
+.event-detail-btn {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.event-detail-btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* 如果有其他特定的按钮或元素需要新，请在这里添加相应的样式 */
+
+/* 更新事件列表页的按钮样式 */
+.events-list .event-card .btn {
+    background-color: var(--accent-color);
+    color: var(--white);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.events-list .event-card .btn:hover,
+.events-list .event-card .btn:focus,
+.events-list .event-card .btn:active {
+    background-color: var(--accent-hover-color);
+    color: var(--white);
+}
+
+/* 如果需要，可以为按钮添加焦点样式 */
+.events-list .event-card .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* 使用 accent-color 的半透明版本 */
+}
+
+/* 确保按钮在被点击时保持悬停状态的颜色 */
+.events-list .event-card .btn:active {
+    background-color: var(--accent-hover-color);
+}
+
+/* 添加新的轮廓按钮样式 */
+.btn-outline-green {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-outline-green:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+/* Flight Search Page Styles */
+.flight-search-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.flight-search-container {
+    background-color: #f7f6f3;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.flight-search-page h1 {
+    color: var(--accent-color);
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.flight-search-form {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group select,
+.form-group input[type="date"],
+.form-group .btn {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: #ffffff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-sizing: border-box; /* 确保padding不会增加元素的总宽度 */
+    height: 40px; /* 确保所有输入元素高度一致 */
+    line-height: 20px; /* 调整行高以确保文本垂直居中 */
+}
+
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+.date-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.date-input-wrapper i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    pointer-events: none;
+}
+
+.form-group input[type="date"] {
+    padding-right: 30px;
+}
+
+.flight-search-form .btn-primary {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+    height: 40px;
+    line-height: 20px;
+    outline: none; /* 移除默认的焦点轮廓 */
+}
+
+.flight-search-form .btn-primary:focus {
+    outline: none; /* 确保在焦点状态下也显示轮廓 */
+    box-shadow: none; /* 移除可能的焦点阴影 */
+}
+
+.flight-search-form .btn-primary:hover {
+    background-color: var(--accent-hover-color);
+}
+
+.search-results {
+    margin-top: 30px;
+}
+
+.no-results {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+.flight-result {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.flight-result h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.flight-result p {
+    margin: 5px 0;
+}
+
+.flight-result .btn-secondary {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.flight-result .btn-secondary:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Footer Styles */
+.site-footer {
+    background-color: var(--accent-color);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.site-footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .flight-search-form .btn-primary {
+        width: 100%;
+    }
+}
+
+/* 在 Flight Search Page Styles 部分添加或修改以下样式 */
+
+.form-group select,
+.form-group input[type="date"] {
+    /* 保留现有的样式 */
+    color: var(--text-color);
+}
+
+.form-group select:invalid,
+.form-group input[type="date"]:invalid {
+    color: #999; /* 未选择时的灰色 */
+}
+
+/* 确保日期输入框的占位符文本也是灰色的 */
+.form-group input[type="date"]::-webkit-datetime-edit {
+    color: #999;
+}
+
+.form-group input[type="date"]:valid {
+    color: var(--text-color); /* 选择后的正常颜色 */
+}
+
+/* 当用户选择日期后，恢复正常颜色 */
+.form-group input[type="date"]:valid::-webkit-datetime-edit {
+    color: var(--text-color);
+}
+
+/* 保持日历图标的样式 */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.5;
+}
+
+/* 在文件末尾添加以下样式 */
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* 在文件末尾添加以下样式 */
+
+/* Notion-style Flight Results */
+.notion-style {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.notion-style .flight-result {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.notion-style .flight-result:hover {
+    background-color: #f7f6f3;
+}
+
+.notion-style .flight-header {
+    margin-bottom: 12px;
+}
+
+.notion-style .flight-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.notion-style .flight-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.notion-style .flight-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #4d4d4d;
+    flex: 1 1 calc(50% - 6px);
+}
+
+.notion-style .info-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.notion-style .btn-secondary {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    outline: none; /* 添加这行来移除默认的轮廓 */
+}
+
+.notion-style .btn-secondary:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* 添加以下新样式 */
+.notion-style .btn-secondary:focus {
+    outline: none; /* 确保在聚焦时也不显示轮廓 */
+    box-shadow: none; /* 移除可能的焦点阴影 */
+}
+
+.notion-style .btn-secondary:active {
+    background-color: var(--accent-hover-color); /* 保持点击时的颜色 */
+}
+
+.notion-style h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.notion-style .no-results {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+    background-color: #f7f6f3;
+    border-radius: 3px;
+}
+
+/* 航班搜索结果页面特定样式 */
+.flight-search-page .flight-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.flight-search-page .cabin-selection {
+    display: flex;
+    gap: 10px;
+}
+
+.flight-search-page .cabin-selection label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.flight-search-page .cabin-selection input[type="radio"] {
+    margin-right: 5px;
+}
+
+.flight-search-page .btn-secondary {
+    margin-top: 0;
+}
+
+/* 确认预订模态框样式 */
+.confirm-booking-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.confirm-booking-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.confirm-booking-modal h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+#flightDetails {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#flightDetails p {
+    margin: 5px 0;
+}
+
+.confirm-booking-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-booking-modal .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-booking-modal .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.confirm-booking-modal .btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.confirm-booking-modal .btn:hover {
+    opacity: 0.9;
+}
+
+/* 在文件末尾添加以下样式 */
+
+/* 移除按钮长按时的红色边框 */
+.event-detail-btn,
+.btn,
+.btn-primary,
+.btn-secondary {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 为了确保在所有浏览器中都能正常工作，我们还可以添加以下样式 */
+.event-detail-btn:focus,
+.btn:focus,
+.btn-primary:focus,
+.btn-secondary:focus {
+    outline: none;
+}
+
+/* 强化移除按钮长按时的红色边框 */
+.event-detail-btn,
+.btn,
+.btn-primary,
+.btn-secondary,
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+.event-detail-btn:focus,
+.btn:focus,
+.btn-primary:focus,
+.btn-secondary:focus,
+button:focus,
+[type="button"]:focus,
+[type="reset"]:focus,
+[type="submit"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* 为移动设备添加活跃状态样式 */
+@media (hover: none) {
+    .event-detail-btn:active,
+    .btn:active,
+    .btn-primary:active,
+    .btn-secondary:active,
+    button:active,
+    [type="button"]:active,
+    [type="reset"]:active,
+    [type="submit"]:active {
+        background-color: var(--accent-hover-color);
+        color: white;
+    }
+}
+
+/* 在文件末尾添加以下样式 */
+
+/* 事件预订确认模态框样式 */
+.confirm-event-booking-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.confirm-event-booking-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.confirm-event-booking-modal h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+#eventDetails {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#eventDetails p {
+    margin: 5px 0;
+}
+
+.confirm-event-booking-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-event-booking-modal .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-event-booking-modal .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.confirm-event-booking-modal .btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.confirm-event-booking-modal .btn:hover {
+    opacity: 0.9;
+}

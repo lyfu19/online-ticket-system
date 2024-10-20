@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% set nav_title = _('Maori Cultural Events') %}
+
+{% block title %}{{ _('Maori Cultural Events') }}{% endblock %}
+
+{% block content %}
+<section class="events-list notion-style">
+    {% for event in events %}
+    <div class="event-card">
+        <div class="event-header">
+            <h2>{{ event.title }}</h2>
+        </div>
+        <p class="event-description">{{ event.description }}</p>
+        <div class="event-details">
+            <div class="event-detail">
+                <span class="detail-icon">📅</span>
+                <span class="detail-text">{{ event.date.strftime('%Y-%m-%d %H:%M') }}</span>
+            </div>
+            <div class="event-detail">
+                <span class="detail-icon">📍</span>
+                <span class="detail-text">{{ event.address }}</span>
+            </div>
+            <div class="event-detail">
+                <span class="detail-icon">💰</span>
+                <span class="detail-text">${{ "%.2f"|format(event.price) }}</span>
+            </div>
+        </div>
+        <a href="{{ url_for('event.event_detail', event_id=event.id) }}" class="btn">{{ _('View Details') }}</a>
+    </div>
+    {% endfor %}
+
+    <div class="pagination-container">
+        {% if total_pages > 1 %}
+            <div class="pagination-info">{{ _('Page') }} {{ pagination.page }} {{ _('of') }} {{ total_pages }}</div>
+            <div class="pagination-controls">
+                {% if pagination.page > 1 %}
+                    <a href="{{ url_for('event.events', page=pagination.page-1) }}" class="pagination-link">&lt; {{ _('Previous') }}</a>
+                {% else %}
+                    <span class="pagination-link disabled">&lt; {{ _('Previous') }}</span>
+                {% endif %}
+                
+                {% for page in range(1, total_pages + 1) %}
+                    {% if page != pagination.page %}
+                        <a href="{{ url_for('event.events', page=page) }}" class="pagination-link">{{ page }}</a>
+                    {% else %}
+                        <span class="pagination-link active">{{ page }}</span>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if pagination.page < total_pages %}
+                    <a href="{{ url_for('event.events', page=pagination.page+1) }}" class="pagination-link">{{ _('Next') }} &gt;</a>
+                {% else %}
+                    <span class="pagination-link disabled">{{ _('Next') }} &gt;</span>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 这里可以添加特定于事件页面的 JavaScript 代码
+</script>
+{% endblock %}

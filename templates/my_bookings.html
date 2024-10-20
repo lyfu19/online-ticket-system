@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('My Bookings') }} - {{ _('NZ Maori Experience') }}{% endblock %}
+
+{% set nav_title = _('My Bookings') %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/my_bookings.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="mb-3">
+        <select id="booking-type-filter" class="form-select notion-select">
+            <option value="all">{{ _('All Bookings') }}</option>
+            <option value="flight">{{ _('Flights') }}</option>
+            <option value="event">{{ _('Events') }}</option>
+        </select>
+    </div>
+    <div id="bookings-list">
+        {% if not event_bookings and not flight_bookings %}
+            <div class="no-bookings-message" data-type="all">{{ _('No bookings found.') }}</div>
+        {% else %}
+            {% if event_bookings %}
+                {% for booking in event_bookings %}
+                <div class="booking-item notion-card" data-type="event">
+                    <h5 class="notion-title">{{ _('Event Booking') }}</h5>
+                    <div class="notion-property"><strong>{{ _('Event') }}:</strong> <span>{{ booking.event.title }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Date') }}:</strong> <span>{{ booking.event.date.strftime('%Y-%m-%d %H:%M') }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Location') }}:</strong> <span>{{ booking.event.address }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Quantity') }}:</strong> <span>{{ booking.quantity }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Total Price') }}:</strong> <span>${{ "%.2f"|format(booking.quantity * booking.event.price) }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Booking Date') }}:</strong> <span>{{ booking.purchase_date.strftime('%Y-%m-%d %H:%M') }}</span></div>
+                    <div class="notion-property notion-description"><strong>{{ _('Description') }}:</strong> <span>{{ booking.event.description[:200] }}...</span></div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% if not event_bookings %}
+                <div class="no-bookings-message" data-type="event">{{ _('No event bookings found.') }}</div>
+            {% endif %}
+
+            {% if flight_bookings %}
+                {% for booking in flight_bookings %}
+                <div class="booking-item notion-card" data-type="flight">
+                    <h5 class="notion-title">{{ _('Flight Booking') }}</h5>
+                    <div class="notion-property"><strong>{{ _('Flight Number') }}:</strong> <span>{{ booking.flight.flight_number }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Airline') }}:</strong> <span>{{ booking.flight.airline }}</span></div>
+                    <div class="notion-property"><strong>{{ _('From') }}:</strong> <span>{{ booking.flight.departure_airport }}</span></div>
+                    <div class="notion-property"><strong>{{ _('To') }}:</strong> <span>{{ booking.flight.arrival_airport }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Departure') }}:</strong> <span>{{ booking.flight.departure_date.strftime('%Y-%m-%d') }} {{ booking.flight.departure_time.strftime('%H:%M') }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Arrival') }}:</strong> <span>{{ booking.flight.arrival_date.strftime('%Y-%m-d') }} {{ booking.flight.arrival_time.strftime('%H:%M') }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Seat Type') }}:</strong> <span>{{ booking.seat_type.capitalize() }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Price') }}:</strong> <span>${{ "%.2f"|format(booking.price) }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Booking Date') }}:</strong> <span>{{ booking.booking_date.strftime('%Y-%m-%d %H:%M') }}</span></div>
+                    <div class="notion-property"><strong>{{ _('Status') }}:</strong> <span>{{ booking.status.capitalize() }}</span></div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% if not flight_bookings %}
+                <div class="no-bookings-message" data-type="flight">{{ _('No flight bookings found.') }}</div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.getElementById('booking-type-filter').addEventListener('change', function() {
+    const selectedType = this.value;
+    const bookingItems = document.querySelectorAll('.booking-item');
+    const noBookingsMessages = document.querySelectorAll('.no-bookings-message');
+    
+    // 隐藏所有预订项目和提示信息
+    bookingItems.forEach(item => item.style.display = 'none');
+    noBookingsMessages.forEach(msg => msg.style.display = 'none');
+    
+    // 显示选中类型的预订项目
+    const visibleBookings = document.querySelectorAll(`.booking-item[data-type="${selectedType}"], .booking-item[data-type="all"]`);
+    visibleBookings.forEach(item => item.style.display = 'block');
+    
+    // 如果没有可见的预订项目，显示相应的提示信息
+    if (visibleBookings.length === 0) {
+        const noBookingsMessage = document.querySelector(`.no-bookings-message[data-type="${selectedType}"], .no-bookings-message[data-type="all"]`);
+        if (noBookingsMessage) {
+            noBookingsMessage.style.display = 'block';
+        }
+    }
+    
+    // 特殊处理 "All Bookings" 选项
+    if (selectedType === 'all') {
+        bookingItems.forEach(item => item.style.display = 'block');
+        if (bookingItems.length === 0) {
+            const allNoBookingsMessage = document.querySelector('.no-bookings-message[data-type="all"]');
+            if (allNoBookingsMessage) {
+                allNoBookingsMessage.style.display = 'block';
+            }
+        }
+    }
+});
+
+// 页面加载时触发一次change事件，以显示正确的内容
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('booking-type-filter').dispatchEvent(new Event('change'));
+});
+</script>
+{% endblock %}

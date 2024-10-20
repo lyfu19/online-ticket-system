@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% set nav_title = _('Booking Successful') %}
+
+{% block title %}{{ _('Booking Successful') }}{% endblock %}
+
+{% block content %}
+<div class="booking-success-page">
+    <div class="booking-success-card">
+        <h1>{{ _('Booking Successful!') }}</h1>
+        <div class="booking-details">
+            <h2>{{ _('Booking Details') }}</h2>
+            <p><strong>{{ _('Booking ID:') }}</strong> {{ booking.id }}</p>
+            <p><strong>{{ _('Flight Number:') }}</strong> {{ booking.flight.flight_number }}</p>
+            <p><strong>{{ _('From:') }}</strong> {{ booking.flight.departure_airport }}</p>
+            <p><strong>{{ _('To:') }}</strong> {{ booking.flight.arrival_airport }}</p>
+            <p><strong>{{ _('Date:') }}</strong> {{ booking.flight.departure_date.strftime('%Y-%m-%d') }}</p>
+            <p><strong>{{ _('Departure Time:') }}</strong> {{ booking.flight.departure_time.strftime('%H:%M') }}</p>
+            <p><strong>{{ _('Arrival Time:') }}</strong> {{ booking.flight.arrival_time.strftime('%H:%M') }}</p>
+            <p><strong>{{ _('Seat Type:') }}</strong> {{ booking.seat_type.capitalize() }}</p>
+            <p><strong>{{ _('Price:') }}</strong> ${{ "%.2f"|format(booking.price) }}</p>
+        </div>
+        <p class="thank-you-message">{{ _('Thank you for choosing our airline. We wish you a pleasant journey!') }}</p>
+        <a href="{{ url_for('flight.flights') }}" class="btn btn-primary">{{ _('Book Another Flight') }}</a>
+    </div>
+</div>
+{% endblock %}

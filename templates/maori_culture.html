@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% set nav_title = _('Maori Culture') %}
+
+{% block content %}
+<div class="container maori-culture-page">
+    <h1 class="page-title">{{ _('Maori Culture: The Heart of New Zealand') }}</h1>
+    
+    <section class="culture-section">
+        <h2>{{ _('Introduction') }}</h2>
+        <p>{{ _('The Maori are the indigenous Polynesian people of New Zealand (Aotearoa), with a rich history spanning over 1000 years. Their culture is an integral part of New Zealand\'s identity, offering a unique window into Polynesian traditions and values.') }}</p>
+        <div class="maori-symbol koru"></div>
+    </section>
+
+    <section class="culture-section">
+        <h2>{{ _('Origins and History') }}</h2>
+        <p>{{ _('Maori ancestors were among the first Polynesian voyagers to settle in New Zealand, arriving in several waves of canoe voyages between 1250 and 1300 CE. Over centuries, they developed a distinct culture adapted to the New Zealand environment.') }}</p>
+        <p>{{ _('The Maori creation story tells of Ranginui (the sky father) and Papatuanuku (the earth mother), whose children separated them to create the world of light. This rich mythology forms the basis of Maori spiritual beliefs and their connection to the land.') }}</p>
+    </section>
+
+    <section class="culture-section">
+        <h2>{{ _('Language') }}</h2>
+        <p>{{ _('Te Reo Maori is the language of the Maori people. It\'s one of New Zealand\'s official languages and is experiencing a revival in usage and learning. The language is known for its beautiful, poetic qualities and its importance in preserving Maori culture.') }}</p>
+        <div class="language-example">
+            <p><strong>{{ _('Example phrase') }}:</strong> {{ _('Kia ora') }} - {{ _('A greeting that means "Hello" or "Be well"') }}</p>
+        </div>
+    </section>
+
+    <section class="culture-section">
+        <h2>{{ _('Traditional Arts') }}</h2>
+        <ul>
+            <li><strong>{{ _('Carving (Whakairo)') }}:</strong> {{ _('Intricate wood carvings that tell stories of ancestry and mythology. These carvings can be found on meeting houses, canoes, and various tools and ornaments.') }}</li>
+            <li><strong>{{ _('Weaving (Raranga)') }}:</strong> {{ _('The art of weaving flax into baskets, mats, and clothing. This craft is not only practical but also holds deep cultural significance.') }}</li>
+            <li><strong>{{ _('Ta Moko') }}:</strong> {{ _('Traditional Maori tattooing, with designs that are unique to the individual. These tattoos often represent a person\'s genealogy, social status, and personal achievements.') }}</li>
+        </ul>
+        <div class="maori-symbol tiki"></div>
+    </section>
+
+    <section class="culture-section">
+        <h2>{{ _('Customs and Traditions') }}</h2>
+        <ul>
+            <li><strong>{{ _('Powhiri') }}:</strong> {{ _('A traditional Maori welcome ceremony that follows a specific protocol. It includes speeches, singing, and the famous hongi (pressing of noses) as a greeting.') }}</li>
+            <li><strong>{{ _('Haka') }}:</strong> {{ _('A traditional war dance, now performed at various cultural events and sports matches. The haka is a powerful display of a group\'s pride, strength and unity.') }}</li>
+            <li><strong>{{ _('Hangi') }}:</strong> {{ _('A traditional method of cooking food using heated rocks buried in a pit oven. This communal cooking method is often used for special occasions and gatherings.') }}</li>
+        </ul>
+    </section>
+
+    <section class="culture-section">
+        <h2>{{ _('Marae') }}</h2>
+        <p>{{ _('The marae is the focal point of Maori communities. It\'s a complex of buildings where people gather for meetings, celebrations, funerals, and other important events. The main building on a marae is the wharenui (meeting house), which is considered the embodiment of an ancestor.') }}</p>
+    </section>
+
+    <section class="culture-section">
+        <h2>{{ _('Mythology') }}</h2>
+        <p>{{ _('Maori mythology is rich with stories of gods, demigods, and legendary heroes. These stories explain the creation of the world and natural phenomena. Some key figures include:') }}</p>
+        <ul>
+            <li><strong>{{ _('Maui') }}:</strong> {{ _('A clever demigod known for fishing up the North Island of New Zealand and slowing the sun.') }}</li>
+            <li><strong>{{ _('Tane Mahuta') }}:</strong> {{ _('The god of forests and birds, who separated the sky and earth.') }}</li>
+            <li><strong>{{ _('Tangaroa') }}:</strong> {{ _('The god of the sea.') }}</li>
+        </ul>
+        <div class="maori-symbol maui-hook"></div>
+    </section>
+
+    <section class="culture-section">
+        <h2>{{ _('Contemporary Maori Culture') }}</h2>
+        <p>{{ _('Today, Maori culture continues to thrive and evolve. It plays a significant role in New Zealand\'s national identity, influencing art, literature, sports, and politics. Many Maori are working to preserve their language and traditions while also embracing modern opportunities.') }}</p>
+        <p>{{ _('Maori culture is celebrated in various festivals throughout New Zealand, such as Matariki (Maori New Year) and Te Matatini (national kapa haka competition).') }}</p>
+    </section>
+</div>
+{% endblock %}

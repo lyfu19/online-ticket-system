@@ -1,0 +1,14 @@
+<nav>
+    <div class="logo">{{ nav_title }}</div>
+    <ul>
+        <li class="nav-placeholder"></li>
+        <li><span id="welcome-message"></span></li>
+        <li><a href="/">{{ _('Home') }}</a></li>
+        {% if is_logged_in %}
+            <li><a href="#" id="logout-button">{{ _('Logout') }}</a></li>
+        {% else %}
+            <li><a href="#" id="login-button">{{ _('Login') }}</a></li>
+            <li><a href="#" id="register-button">{{ _('Register') }}</a></li>
+        {% endif %}
+    </ul>
+</nav>

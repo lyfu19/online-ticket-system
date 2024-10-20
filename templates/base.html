@@ -1,67 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_locale }}">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}{{ _('Online Ticketing System') }}{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  {% block extra_css %}{% endblock %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{{ _('NZ Maori Experience') }}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+
+    {% block styles %}{% endblock %}
+
+    <script>
+        var isLoggedIn = `{{ 'true' if is_logged_in else 'false' }}` === "true";
+        var userEmail = "{{ user_email }}";
+        var translations = {
+            languageChanged: "{{ _('Language changed to') }}",
+            welcome: "{{ _('Welcome') }}",
+            home: "{{ _('Home') }}",
+            myBookings: "{{ _('My Bookings') }}",
+            logout: "{{ _('Logout') }}",
+            language: "{{ _('Language') }}",
+            register: "{{ _('Register') }}",
+            login: "{{ _('Login') }}",
+            loggedOut: "{{ _('Logged out successfully') }}",
+            error: "{{ _('Error') }}",
+            validEmailError: "{{ _('Please enter a valid email address') }}",
+            loggedIn: "{{ _('Logged in successfully') }}",
+            passwordsMismatch: "{{ _('Passwords do not match') }}",
+            genericError: "{{ _('An error occurred. Please try again.') }}",
+            langEN: "{{ url_for('misc.set_language', lang='en') }}",
+            langMI: "{{ url_for('misc.set_language', lang='mi') }}",
+            langZH: "{{ url_for('misc.set_language', lang='zh') }}"
+        };
+    </script>
+
+    {% block extra_head %}{% endblock %}
 </head>
 
 <body>
-  <!-- 顶部导航栏 -->
-  <div class="navbar">
-    <div class="logo">
-      <!-- 小房子图标 -->
-      <a href="{{ url_for('home') }}" class="home-button">
-        <i class="fas fa-home"></i>
-      </a>
-      {% block page_title %}{{ _('Online Ticketing System') }}{% endblock %}
-    </div>
-    <div class="nav-links">
-      {% if current_user.is_authenticated %}
-      <!-- 用户已登录，显示用户名和登出按钮 -->
-      <span>{{ _('Welcome, ') }}{{ current_user.username }}!</span>
-      <a href="{{ url_for('auth.logout', next=request.path) }}" class="secondary-button">{{ _('Logout') }}</a>
-      {% else %}
-      <!-- 用户未登录，显示注册和登录按钮 -->
-      <a href="#" class="secondary-button" onclick="openModal('register')">{{ _('Register') }}</a>
-      <a href="#" class="primary-button" onclick="openModal('login')">{{ _('Sign In') }}</a>
-      {% endif %}
-      <!-- 设置按钮和下拉菜单 -->
-      <div class="dropdown">
-        <a href="#" class="gear-button" onclick="toggleDropdown()">
-          <i class="fas fa-cog"></i>
-        </a>
-        <div id="settingsDropdown" class="dropdown-content">
-          {% if current_user.is_authenticated %}
-          <a href="#" onclick="openModal('settings')">{{ _('Personal Settings') }}</a>
-          {% endif %}
-          <a href="#" onclick="openModal('languageModal')">{{ _('Language Settings') }}</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    <header>{% include 'nav.html' with context %}</header>
 
-  <div class="container">{% block content %}{% endblock %}</div>
+    <main>{% block content %}{% endblock %}</main>
 
-  <!-- 页脚 -->
-  <footer>
-    <p>© 2024 {{ _('Online Ticketing System') }}. {{ _('All Rights Reserved.') }}</p>
-    <p>
-      {{ _('If you have any questions, please contact us at') }}
-      <a href="mailto:support@ticketsystem.com">support@yoobeestudent.ac.nz</a>
-    </p>
-  </footer>
+    <footer class="site-footer">
+        <p>
+            &copy; 2023 {{ _('New Zealand Maori Experience') }}. {{ _('All rights
+            reserved.') }}
+        </p>
+    </footer>
 
-  <!-- 引入模态框文件 -->
-  {% include 'modals.html' %}
+    {% include 'modals.html' %}
 
-  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/global.js') }}"></script>
-  {% block extra_js %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>

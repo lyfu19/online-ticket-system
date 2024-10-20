@@ -1,0 +1,85 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f7f6f3;
+    color: #37352f;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.notion-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    background-color: white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+#bookings-list {
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.notion-card {
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+    padding: 15px;
+    transition: background 100ms ease-out 0s;
+    width: 100%;
+    box-sizing: border-box;
+}
+.notion-card:hover {
+    background-color: rgba(55, 53, 47, 0.03);
+}
+.notion-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+.notion-property {
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: baseline;
+}
+.notion-property strong {
+    min-width: 120px;
+    flex-shrink: 0;
+    display: inline-block;
+    color: rgba(55, 53, 47, 0.65);
+}
+.notion-property span {
+    flex-grow: 1;
+    word-break: break-word;
+}
+.notion-description {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(55, 53, 47, 0.09);
+}
+.notion-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.booking-item.hidden, .no-bookings-message.hidden {
+    display: none;
+}
+.no-bookings-message {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    color: #666;
+    font-style: italic;
+}
